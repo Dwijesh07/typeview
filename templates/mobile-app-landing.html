@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapFit | Your Personal AI Fitness Coach</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #fdf4ff 0%, #f0fdf4 50%, #fff7ed 100%); color: #1e293b; }
+        
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes softPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.4); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-scale { animation: fadeInScale 0.6s ease-out forwards; opacity: 0; }
+        .float { animation: float 6s ease-in-out infinite; }
+        .soft-pulse { animation: softPulse 3s ease-in-out infinite; }
+        .slide-right { animation: slideInRight 0.6s ease-out forwards; opacity: 0; }
+        .slide-left { animation: slideInLeft 0.6s ease-out forwards; opacity: 0; }
+        
+        /* Gradient Styles */
+        .gradient-primary {
+            background: linear-gradient(135deg, #c084fc 0%, #60a5fa 50%, #f472b6 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #c084fc 0%, #60a5fa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg-soft {
+            background: linear-gradient(135deg, #fae8ff 0%, #dcfce7 50%, #ffedd5 100%);
+        }
+        
+        /* Cards */
+        .card-soft {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(192, 132, 252, 0.2);
+            border-radius: 32px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .card-soft:hover {
+            transform: translateY(-8px);
+            border-color: rgba(192, 132, 252, 0.4);
+            box-shadow: 0 25px 40px -12px rgba(192, 132, 252, 0.2);
+        }
+        
+        /* Buttons */
+        .btn-primary-soft {
+            background: linear-gradient(135deg, #c084fc, #60a5fa);
+            transition: all 0.3s;
+            color: white;
+        }
+        .btn-primary-soft:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(192, 132, 252, 0.5);
+        }
+        .btn-outline-soft {
+            border: 1px solid rgba(192, 132, 252, 0.5);
+            background: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s;
+            color: #8b5cf6;
+        }
+        .btn-outline-soft:hover {
+            border-color: #c084fc;
+            background: rgba(192, 132, 252, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Feature Cards */
+        .feature-card {
+            background: white;
+            border-radius: 24px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(192, 132, 252, 0.15);
+        }
+        
+        /* Testimonial Cards */
+        .testimonial-card {
+            background: white;
+            border-radius: 24px;
+            transition: all 0.3s;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Stats */
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c084fc, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #c084fc, #60a5fa); border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-5 px-6 bg-white/80 backdrop-blur-xl border-b border-purple-100">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold"><span class="gradient-text">SnapFit</span></div>
+            <div class="hidden md:flex gap-8">
+                <a href="#" class="text-gray-600 hover:text-purple-500 transition">Features</a>
+                <a href="#" class="text-gray-600 hover:text-purple-500 transition">How It Works</a>
+                <a href="#" class="text-gray-600 hover:text-purple-500 transition">Testimonials</a>
+                <a href="#" class="text-gray-600 hover:text-purple-500 transition">Pricing</a>
+            </div>
+            <button class="px-6 py-2 btn-primary-soft rounded-full text-white font-semibold">Download Now</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 overflow-hidden">
+        <div class="absolute inset-0 gradient-bg-soft"></div>
+        <div class="absolute top-20 left-10 w-72 h-72 bg-purple-200 rounded-full filter blur-[80px] opacity-50"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-200 rounded-full filter blur-[100px] opacity-50"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-pink-100 rounded-full filter blur-[100px] opacity-40"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 border border-purple-200 mb-6 fade-up">
+                        <span class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></span>
+                        <span class="text-sm text-purple-600">#1 Fitness App 2024</span>
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.2] fade-up" style="animation-delay: 0.1s;">
+                        Your personal<br>
+                        <span class="gradient-text">AI fitness coach</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed fade-up" style="animation-delay: 0.2s;">
+                        SnapFit uses advanced AI to create personalized workout plans, track your progress, and keep you motivated. Achieve your fitness goals faster than ever.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 fade-up" style="animation-delay: 0.3s;">
+                        <button class="px-8 py-4 btn-primary-soft rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2 group">
+                            <i class="fab fa-apple"></i> App Store
+                        </button>
+                        <button class="px-8 py-4 btn-outline-soft rounded-full font-semibold text-lg flex items-center justify-center gap-2 group">
+                            <i class="fab fa-google-play"></i> Google Play
+                        </button>
+                    </div>
+                    <div class="mt-8 flex items-center gap-4 fade-up" style="animation-delay: 0.4s;">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-purple-200 flex items-center justify-center text-xs text-purple-600 border-2 border-white"><i class="fas fa-user"></i></div>
+                            <div class="w-8 h-8 rounded-full bg-blue-200 flex items-center justify-center text-xs text-blue-600 border-2 border-white"><i class="fas fa-user"></i></div>
+                            <div class="w-8 h-8 rounded-full bg-pink-200 flex items-center justify-center text-xs text-pink-600 border-2 border-white"><i class="fas fa-user"></i></div>
+                            <div class="w-8 h-8 rounded-full bg-green-200 flex items-center justify-center text-xs text-green-600 border-2 border-white"><i class="fas fa-user-plus"></i></div>
+                        </div>
+                        <span class="text-sm text-gray-500">Join <span class="font-semibold text-purple-600">500,000+</span> active users</span>
+                    </div>
+                </div>
+                <div class="relative flex justify-center slide-right" style="animation-delay: 0.2s;">
+                    <div class="relative">
+                        <div class="w-80 h-80 bg-gradient-to-br from-purple-100 to-blue-100 rounded-3xl flex items-center justify-center soft-pulse float">
+                            <i class="fas fa-heartbeat text-8xl text-purple-500"></i>
+                        </div>
+                        <div class="absolute -top-6 -right-6 bg-white rounded-2xl p-3 shadow-lg">
+                            <div class="flex items-center gap-2"><i class="fas fa-fire text-orange-500"></i><span class="font-bold text-sm">500+ calories</span></div>
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-3 shadow-lg">
+                            <div class="flex items-center gap-2"><i class="fas fa-clock text-purple-500"></i><span class="font-bold text-sm">30 min daily</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 px-6 bg-white/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="fade-up"><div class="stat-number">500K+</div><div class="text-gray-500 mt-1">Downloads</div></div>
+                <div class="fade-up" style="animation-delay: 0.1s;"><div class="stat-number">4.9</div><div class="text-gray-500 mt-1">App Store Rating</div></div>
+                <div class="fade-up" style="animation-delay: 0.2s;"><div class="stat-number">1000+</div><div class="text-gray-500 mt-1">Workouts</div></div>
+                <div class="fade-up" style="animation-delay: 0.3s;"><div class="stat-number">50+</div><div class="text-gray-500 mt-1">Countries</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-purple-500 font-semibold mb-3 tracking-wider">WHY SNAPFIT?</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Everything you need to stay fit</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Powerful features designed to transform your fitness journey</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-brain text-2xl text-purple-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI-Powered Coaching</h3>
+                    <p class="text-gray-500 leading-relaxed">Personalized workout plans that adapt to your progress, goals, and fitness level.</p>
+                </div>
+                
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-chart-line text-2xl text-blue-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Real-Time Tracking</h3>
+                    <p class="text-gray-500 leading-relaxed">Track your workouts, calories burned, steps, and progress with beautiful analytics.</p>
+                </div>
+                
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-pink-100 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-users text-2xl text-pink-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Community Support</h3>
+                    <p class="text-gray-500 leading-relaxed">Connect with like-minded individuals, share achievements, and stay motivated together.</p>
+                </div>
+                
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-video text-2xl text-green-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">HD Video Workouts</h3>
+                    <p class="text-gray-500 leading-relaxed">Professional trainers guide you through every exercise with crystal-clear instructions.</p>
+                </div>
+                
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-orange-100 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-calendar-alt text-2xl text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Scheduling</h3>
+                    <p class="text-gray-500 leading-relaxed">Plan your workouts around your schedule with intelligent reminders and suggestions.</p>
+                </div>
+                
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-teal-100 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-chart-simple text-2xl text-teal-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Progress Analytics</h3>
+                    <p class="text-gray-500 leading-relaxed">Beautiful charts and insights to see your improvement over time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-28 px-6 bg-white/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-purple-500 font-semibold mb-3 tracking-wider">GET STARTED</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">How SnapFit works</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Three simple steps to transform your fitness journey</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="text-center">
+                    <div class="w-20 h-20 rounded-full gradient-primary flex items-center justify-center text-white text-2xl font-bold mx-auto mb-5 shadow-lg">1</div>
+                    <h3 class="text-xl font-bold mb-3">Download the app</h3>
+                    <p class="text-gray-500">Get SnapFit from App Store or Google Play, completely free to start.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 rounded-full gradient-primary flex items-center justify-center text-white text-2xl font-bold mx-auto mb-5 shadow-lg">2</div>
+                    <h3 class="text-xl font-bold mb-3">Set your goals</h3>
+                    <p class="text-gray-500">Tell us about your fitness goals, preferences, and current level.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 rounded-full gradient-primary flex items-center justify-center text-white text-2xl font-bold mx-auto mb-5 shadow-lg">3</div>
+                    <h3 class="text-xl font-bold mb-3">Start your journey</h3>
+                    <p class="text-gray-500">Get personalized workouts and start seeing results in just 2 weeks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-purple-500 font-semibold mb-3 tracking-wider">SUCCESS STORIES</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">What our users say</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Join thousands who transformed their lives with SnapFit</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card p-8 shadow-sm">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-6">"SnapFit completely changed my relationship with fitness. The AI coach keeps me accountable and the workouts are actually fun!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center"><i class="fas fa-user text-purple-500"></i></div>
+                        <div><div class="font-semibold">Sarah Johnson</div><div class="text-sm text-gray-400">Lost 25 lbs</div></div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card p-8 shadow-sm">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-6">"I've tried countless fitness apps, but SnapFit is different. The personalized plans actually work and the community is amazing."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center"><i class="fas fa-user text-blue-500"></i></div>
+                        <div><div class="font-semibold">Michael Chen</div><div class="text-sm text-gray-400">Completed 100+ workouts</div></div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card p-8 shadow-sm">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-6">"The best fitness investment I've ever made. Down 40 lbs and feeling stronger than ever. The AI coaching is like having a personal trainer."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center"><i class="fas fa-user text-pink-500"></i></div>
+                        <div><div class="font-semibold">Emma Rodriguez</div><div class="text-sm text-gray-400">Transformed in 6 months</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-28 px-6 bg-white/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-purple-500 font-semibold mb-3 tracking-wider">PRICING</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Simple, flexible plans</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Choose the plan that works for you</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="card-soft p-8 text-center">
+                    <h3 class="text-xl font-bold mb-2">Free</h3>
+                    <div class="text-4xl font-bold mb-4">$0</div>
+                    <ul class="space-y-3 mb-6 text-left">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i>Basic workouts</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i>Daily tips</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i>Community access</li>
+                    </ul>
+                    <button class="w-full py-2 border border-purple-300 rounded-full text-purple-600 hover:bg-purple-50 transition">Get Started</button>
+                </div>
+                
+                <div class="card-soft p-8 text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-gradient-primary text-white px-3 py-1 rounded-bl-xl text-xs font-bold">POPULAR</div>
+                    <h3 class="text-xl font-bold mb-2">Pro</h3>
+                    <div class="text-4xl font-bold mb-4">$9.99<span class="text-base text-gray-400">/month</span></div>
+                    <ul class="space-y-3 mb-6 text-left">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i>Everything in Free</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i>AI personalized plans</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i>HD video workouts</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i>Advanced analytics</li>
+                    </ul>
+                    <button class="w-full py-2 btn-primary-soft rounded-full text-white font-semibold">Start Free Trial</button>
+                </div>
+                
+                <div class="card-soft p-8 text-center">
+                    <h3 class="text-xl font-bold mb-2">Annual</h3>
+                    <div class="text-4xl font-bold mb-4">$79<span class="text-base text-gray-400">/year</span></div>
+                    <ul class="space-y-3 mb-6 text-left">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i>Everything in Pro</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i>Save 35%</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i>Priority support</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i>Exclusive content</li>
+                    </ul>
+                    <button class="w-full py-2 border border-purple-300 rounded-full text-purple-600 hover:bg-purple-50 transition">Get Annual</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="card-soft p-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to transform your fitness journey?</h2>
+                <p class="text-gray-500 text-lg mb-8">Join 500,000+ users who already achieved their goals with SnapFit.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="px-8 py-4 btn-primary-soft rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2"><i class="fab fa-apple"></i> App Store</button>
+                    <button class="px-8 py-4 btn-outline-soft rounded-full font-semibold text-lg flex items-center justify-center gap-2"><i class="fab fa-google-play"></i> Google Play</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-purple-100">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-2xl font-bold gradient-text">SnapFit</div>
+            <div class="flex gap-8">
+                <i class="fab fa-instagram text-gray-400 hover:text-purple-500 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-twitter text-gray-400 hover:text-purple-500 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-facebook text-gray-400 hover:text-purple-500 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-youtube text-gray-400 hover:text-purple-500 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-tiktok text-gray-400 hover:text-purple-500 cursor-pointer transition text-xl"></i>
+            </div>
+            <div class="text-gray-400 text-sm">© 2024 SnapFit. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation trigger on scroll
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.feature-card, .testimonial-card, .card-soft').forEach(el => {
+            el.style.opacity = "0";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

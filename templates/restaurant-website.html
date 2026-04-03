@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Terrazza | Italian Restaurant & Wine Bar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #fefaf5; color: #2c2418; }
+        
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes softFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes gentlePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(218, 165, 32, 0.2); }
+            50% { box-shadow: 0 0 0 15px rgba(218, 165, 32, 0); }
+        }
+        
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-scale { animation: fadeInScale 0.6s ease-out forwards; opacity: 0; }
+        .soft-float { animation: softFloat 6s ease-in-out infinite; }
+        .gentle-pulse { animation: gentlePulse 2s infinite; }
+        
+        /* Gradient Styles */
+        .gradient-warm {
+            background: linear-gradient(135deg, #f5e6d3 0%, #e8d9c4 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #b87333 0%, #cd7a32 50%, #d4a373 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Card Styles */
+        .card-soft {
+            background: white;
+            border-radius: 32px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+        .card-soft:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -12px rgba(184, 115, 51, 0.15);
+        }
+        
+        /* Menu Item Card */
+        .menu-item {
+            border-bottom: 1px solid #f0e5d8;
+            transition: all 0.3s;
+        }
+        .menu-item:hover {
+            border-bottom-color: #b87333;
+            padding-left: 8px;
+        }
+        
+        /* Button Styles */
+        .btn-primary-soft {
+            background: linear-gradient(135deg, #b87333, #cd7a32);
+            transition: all 0.3s;
+            color: white;
+        }
+        .btn-primary-soft:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(184, 115, 51, 0.4);
+        }
+        .btn-outline-soft {
+            border: 1px solid #b87333;
+            color: #b87333;
+            transition: all 0.3s;
+        }
+        .btn-outline-soft:hover {
+            background: rgba(184, 115, 51, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #b87333, #cd7a32);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5e6d3; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #b87333, #cd7a32); border-radius: 4px; }
+        
+        /* Quote Styling */
+        .quote-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 80px;
+            line-height: 1;
+            color: #e8d9c4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-5 px-6 bg-white/95 backdrop-blur-sm shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold font-['Playfair_Display']">
+                <span class="gradient-text">La Terrazza</span>
+            </div>
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link text-gray-700 hover:text-[#b87333] transition">Home</a>
+                <a href="#menu" class="nav-link text-gray-700 hover:text-[#b87333] transition">Menu</a>
+                <a href="#about" class="nav-link text-gray-700 hover:text-[#b87333] transition">Our Story</a>
+                <a href="#reservations" class="nav-link text-gray-700 hover:text-[#b87333] transition">Reservations</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-[#b87333] transition">Contact</a>
+            </div>
+            <button class="px-6 py-2 btn-primary-soft rounded-full text-white font-semibold">Reserve a Table</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 gradient-warm"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23b87333" fill-opacity="0.03"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-[#b87333]/20 mb-8 fade-up">
+                <span class="w-2 h-2 bg-[#b87333] rounded-full animate-pulse"></span>
+                <span class="text-sm text-[#b87333]">Est. 2012</span>
+            </div>
+            <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[1.2] font-['Playfair_Display'] fade-up" style="animation-delay: 0.1s;">
+                Authentic Italian<br>
+                <span class="gradient-text">Cuisine & Wine</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed fade-up" style="animation-delay: 0.2s;">
+                Experience the true taste of Italy in the heart of the city. Handcrafted pasta, wood-fired pizzas, and an exquisite selection of Italian wines.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up" style="animation-delay: 0.3s;">
+                <button class="px-8 py-4 btn-primary-soft rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2 group">
+                    View Menu <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                </button>
+                <button class="px-8 py-4 btn-outline-soft rounded-full font-semibold text-lg flex items-center justify-center gap-2">
+                    <i class="fas fa-calendar-alt"></i> Book a Table
+                </button>
+            </div>
+            <div class="mt-12 flex flex-wrap justify-center gap-8 fade-up" style="animation-delay: 0.4s;">
+                <div class="text-center"><div class="text-2xl font-bold gradient-text">Tue - Sun</div><div class="text-sm text-gray-500">12:00 PM - 11:00 PM</div></div>
+                <div class="text-center"><div class="text-2xl font-bold gradient-text">Mon</div><div class="text-sm text-gray-500">Closed</div></div>
+                <div class="text-center"><div class="text-2xl font-bold gradient-text">+1 (555) 123-4567</div><div class="text-sm text-gray-500">Call for Reservations</div></div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-[#b87333] text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Featured Dishes -->
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-[#b87333] font-semibold mb-3 tracking-wider">CHEF'S SELECTION</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5 font-['Playfair_Display']">Signature Dishes</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Our most beloved creations, crafted with passion and tradition</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-soft p-6 text-center">
+                    <div class="w-24 h-24 rounded-full bg-[#f5e6d3] flex items-center justify-center mx-auto mb-5 soft-float">
+                        <i class="fas fa-utensils text-3xl text-[#b87333]"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Handmade Ravioli</h3>
+                    <p class="text-gray-500 text-sm mb-3">Stuffed with ricotta and spinach, served with sage butter sauce</p>
+                    <div class="text-2xl font-bold text-[#b87333]">$24</div>
+                </div>
+                <div class="card-soft p-6 text-center">
+                    <div class="w-24 h-24 rounded-full bg-[#f5e6d3] flex items-center justify-center mx-auto mb-5 soft-float">
+                        <i class="fas fa-pizza-slice text-3xl text-[#b87333]"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Truffle Pizza</h3>
+                    <p class="text-gray-500 text-sm mb-3">Mushroom cream, black truffle, mozzarella, fresh arugula</p>
+                    <div class="text-2xl font-bold text-[#b87333]">$28</div>
+                </div>
+                <div class="card-soft p-6 text-center">
+                    <div class="w-24 h-24 rounded-full bg-[#f5e6d3] flex items-center justify-center mx-auto mb-5 soft-float">
+                        <i class="fas fa-fish text-3xl text-[#b87333]"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Sea Bass</h3>
+                    <p class="text-gray-500 text-sm mb-3">Grilled Mediterranean sea bass, lemon herb sauce, roasted vegetables</p>
+                    <div class="text-2xl font-bold text-[#b87333]">$34</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-24 px-6 bg-[#fef9f2]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-[#b87333] font-semibold mb-3 tracking-wider">OUR MENU</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5 font-['Playfair_Display']">Culinary Journey</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Fresh ingredients, authentic recipes, unforgettable flavors</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Antipasti -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2 border-[#b87333] inline-block">Antipasti</h3>
+                    <div class="space-y-4 mt-6">
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Bruschetta</h4><p class="text-gray-500 text-sm">Toasted bread, fresh tomatoes, garlic, basil, olive oil</p></div>
+                                <span class="font-bold text-[#b87333]">$12</span>
+                            </div>
+                        </div>
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Calamari Fritti</h4><p class="text-gray-500 text-sm">Lightly fried calamari, marinara sauce, lemon</p></div>
+                                <span class="font-bold text-[#b87333]">$16</span>
+                            </div>
+                        </div>
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Burrata</h4><p class="text-gray-500 text-sm">Creamy burrata, heirloom tomatoes, balsamic glaze, basil</p></div>
+                                <span class="font-bold text-[#b87333]">$18</span>
+                            </div>
+                        </div>
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Prosciutto e Melone</h4><p class="text-gray-500 text-sm">Parma ham, cantaloupe melon, arugula</p></div>
+                                <span class="font-bold text-[#b87333]">$15</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Primi Piatti -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2 border-[#b87333] inline-block">Primi Piatti</h3>
+                    <div class="space-y-4 mt-6">
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Spaghetti Carbonara</h4><p class="text-gray-500 text-sm">Egg, pecorino romano, guanciale, black pepper</p></div>
+                                <span class="font-bold text-[#b87333]">$22</span>
+                            </div>
+                        </div>
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Risotto ai Funghi</h4><p class="text-gray-500 text-sm">Carnaroli rice, wild mushrooms, truffle oil, parmesan</p></div>
+                                <span class="font-bold text-[#b87333]">$24</span>
+                            </div>
+                        </div>
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Lasagna</h4><p class="text-gray-500 text-sm">Layers of pasta, bolognese, béchamel, parmesan</p></div>
+                                <span class="font-bold text-[#b87333]">$21</span>
+                            </div>
+                        </div>
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Gnocchi al Pesto</h4><p class="text-gray-500 text-sm">Potato dumplings, basil pesto, pine nuts, parmesan</p></div>
+                                <span class="font-bold text-[#b87333]">$20</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Secondi -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2 border-[#b87333] inline-block">Secondi</h3>
+                    <div class="space-y-4 mt-6">
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Bistecca Fiorentina</h4><p class="text-gray-500 text-sm">Grilled T-bone steak, rosemary, roasted potatoes</p></div>
+                                <span class="font-bold text-[#b87333]">$48</span>
+                            </div>
+                        </div>
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Pollo al Limone</h4><p class="text-gray-500 text-sm">Lemon herb chicken, roasted vegetables, white wine sauce</p></div>
+                                <span class="font-bold text-[#b87333]">$26</span>
+                            </div>
+                        </div>
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Salmone</h4><p class="text-gray-500 text-sm">Grilled Atlantic salmon, lemon butter sauce, asparagus</p></div>
+                                <span class="font-bold text-[#b87333]">$29</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dolci -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2 border-[#b87333] inline-block">Dolci</h3>
+                    <div class="space-y-4 mt-6">
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Tiramisu</h4><p class="text-gray-500 text-sm">Classic Italian dessert with mascarpone, coffee, ladyfingers</p></div>
+                                <span class="font-bold text-[#b87333]">$9</span>
+                            </div>
+                        </div>
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Panna Cotta</h4><p class="text-gray-500 text-sm">Vanilla cream, mixed berry coulis, fresh berries</p></div>
+                                <span class="font-bold text-[#b87333]">$8</span>
+                            </div>
+                        </div>
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Cannoli Siciliani</h4><p class="text-gray-500 text-sm">Crispy pastry filled with sweet ricotta, pistachio, chocolate chips</p></div>
+                                <span class="font-bold text-[#b87333]">$8</span>
+                            </div>
+                        </div>
+                        <div class="menu-item pb-4">
+                            <div class="flex justify-between items-start">
+                                <div><h4 class="font-bold text-lg">Affogato</h4><p class="text-gray-500 text-sm">Vanilla gelato, espresso, amaretto cookie</p></div>
+                                <span class="font-bold text-[#b87333]">$7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="px-8 py-3 btn-outline-soft rounded-full font-semibold">View Full Menu →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-left">
+                    <div class="relative">
+                        <div class="absolute -top-6 -left-6 w-32 h-32 bg-[#f5e6d3] rounded-full"></div>
+                        <div class="relative bg-[#f5e6d3] rounded-3xl p-8 text-center">
+                            <div class="quote-mark text-6xl mb-4">"</div>
+                            <p class="text-gray-700 italic text-lg leading-relaxed mb-6">Food is our common ground, a universal experience. At La Terrazza, we bring the authentic flavors of Italy to your table, made with love and the finest ingredients.</p>
+                            <div class="w-16 h-0.5 bg-[#b87333] mx-auto mb-4"></div>
+                            <p class="font-bold text-[#b87333]">Chef Giovanni Rossi</p>
+                            <p class="text-sm text-gray-500">Executive Chef, 3rd Generation Italian</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-right">
+                    <p class="text-[#b87333] font-semibold mb-3 tracking-wider">OUR STORY</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 font-['Playfair_Display']">A Taste of Italy in Every Bite</h2>
+                    <p class="text-gray-600 leading-relaxed mb-4">Founded in 2012 by the Rossi family, La Terrazza brings generations of Italian culinary tradition to the heart of the city. Every recipe has been passed down through three generations, perfected over time.</p>
+                    <p class="text-gray-600 leading-relaxed mb-6">We believe in using only the freshest, locally-sourced ingredients combined with authentic Italian imports to create dishes that transport you to the hills of Tuscany.</p>
+                    <div class="flex gap-6">
+                        <div><div class="text-2xl font-bold text-[#b87333]">12+</div><div class="text-sm text-gray-500">Years of Excellence</div></div>
+                        <div><div class="text-2xl font-bold text-[#b87333]">10K+</div><div class="text-sm text-gray-500">Happy Guests Yearly</div></div>
+                        <div><div class="text-2xl font-bold text-[#b87333]">50+</div><div class="text-sm text-gray-500">Italian Wines</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 px-6 bg-[#fef9f2]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-[#b87333] font-semibold mb-3 tracking-wider">GUEST REVIEWS</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5 font-['Playfair_Display']">What Our Guests Say</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Loved by food enthusiasts and critics alike</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-soft p-6">
+                    <div class="flex text-[#b87333] mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"The best Italian food I've had outside of Italy! The handmade pasta is exceptional and the service is impeccable."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[#f5e6d3] flex items-center justify-center"><i class="fas fa-user text-[#b87333]"></i></div>
+                        <div><div class="font-semibold">Sarah Johnson</div><div class="text-xs text-gray-400">Google Review</div></div>
+                    </div>
+                </div>
+                <div class="card-soft p-6">
+                    <div class="flex text-[#b87333] mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"Absolutely incredible dining experience. The truffle pizza is to die for and the wine selection is outstanding."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[#f5e6d3] flex items-center justify-center"><i class="fas fa-user text-[#b87333]"></i></div>
+                        <div><div class="font-semibold">Michael Chen</div><div class="text-xs text-gray-400">TripAdvisor</div></div>
+                    </div>
+                </div>
+                <div class="card-soft p-6">
+                    <div class="flex text-[#b87333] mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"Romantic atmosphere, attentive staff, and the most delicious tiramisu I've ever had. Highly recommend!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[#f5e6d3] flex items-center justify-center"><i class="fas fa-user text-[#b87333]"></i></div>
+                        <div><div class="font-semibold">Emma Rodriguez</div><div class="text-xs text-gray-400">OpenTable</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservations -->
+    <section id="reservations" class="py-24 px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="card-soft p-8 md:p-12 text-center">
+                <p class="text-[#b87333] font-semibold mb-3 tracking-wider">MAKE A RESERVATION</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5 font-['Playfair_Display']">Book Your Table</h2>
+                <p class="text-gray-500 mb-8">Secure your spot for an unforgettable dining experience</p>
+                
+                <form class="grid md:grid-cols-2 gap-4 text-left">
+                    <input type="text" placeholder="Full Name" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#b87333]">
+                    <input type="email" placeholder="Email Address" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#b87333]">
+                    <input type="tel" placeholder="Phone Number" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#b87333]">
+                    <input type="date" placeholder="Date" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#b87333]">
+                    <input type="time" placeholder="Time" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#b87333]">
+                    <select class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#b87333]">
+                        <option>2 Guests</option><option>4 Guests</option><option>6 Guests</option><option>8+ Guests</option>
+                    </select>
+                    <textarea placeholder="Special Requests (dietary restrictions, allergies, etc.)" rows="3" class="md:col-span-2 w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-[#b87333]"></textarea>
+                </form>
+                <button class="mt-6 px-8 py-3 btn-primary-soft rounded-full text-white font-semibold">Reserve Now →</button>
+                <p class="text-xs text-gray-400 mt-4">We'll confirm your reservation within 24 hours</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Location -->
+    <section id="contact" class="py-24 px-6 bg-[#fef9f2]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <p class="text-[#b87333] font-semibold mb-3 tracking-wider">VISIT US</p>
+                    <h2 class="text-4xl font-bold mb-6 font-['Playfair_Display']">Find & Contact</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4"><i class="fas fa-map-marker-alt text-[#b87333] text-xl mt-1"></i><div><p class="font-semibold">Address</p><p class="text-gray-600">123 Italian Way, San Francisco, CA 94105</p></div></div>
+                        <div class="flex items-start gap-4"><i class="fas fa-phone-alt text-[#b87333] text-xl mt-1"></i><div><p class="font-semibold">Phone</p><p class="text-gray-600">+1 (555) 123-4567</p></div></div>
+                        <div class="flex items-start gap-4"><i class="fas fa-envelope text-[#b87333] text-xl mt-1"></i><div><p class="font-semibold">Email</p><p class="text-gray-600">hello@laterrazza.com</p></div></div>
+                        <div class="flex items-start gap-4"><i class="fas fa-clock text-[#b87333] text-xl mt-1"></i><div><p class="font-semibold">Hours</p><p class="text-gray-600">Tuesday - Sunday: 12:00 PM - 11:00 PM<br>Monday: Closed</p></div></div>
+                    </div>
+                    <div class="flex gap-4 mt-6">
+                        <i class="fab fa-instagram text-2xl text-gray-400 hover:text-[#b87333] cursor-pointer transition"></i>
+                        <i class="fab fa-facebook text-2xl text-gray-400 hover:text-[#b87333] cursor-pointer transition"></i>
+                        <i class="fab fa-tripadvisor text-2xl text-gray-400 hover:text-[#b87333] cursor-pointer transition"></i>
+                        <i class="fab fa-yelp text-2xl text-gray-400 hover:text-[#b87333] cursor-pointer transition"></i>
+                    </div>
+                </div>
+                <div class="bg-gray-200 rounded-2xl h-64 md:h-auto flex items-center justify-center">
+                    <i class="fas fa-map text-4xl text-gray-400"></i>
+                    <span class="ml-2 text-gray-500">Map View</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-[#2c2418] text-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-2xl font-bold font-['Playfair_Display']">La Terrazza</div>
+            <div class="text-gray-400 text-sm text-center">© 2024 La Terrazza Ristorante. All rights reserved. <br class="md:hidden"> Authentic Italian Cuisine Since 2012</div>
+            <div class="text-gray-400 text-sm">Made with <i class="fas fa-heart text-[#b87333]"></i> in Italy</div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Form submission alert
+        const reserveBtn = document.querySelector('.btn-primary-soft');
+        if (reserveBtn) {
+            reserveBtn.addEventListener('click', () => {
+                alert('Thank you for your reservation request! We will confirm within 24 hours.');
+            });
+        }
+    </script>
+</body>
+</html>

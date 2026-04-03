@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>TypeView - AI-Powered Development Platform</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden !important;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            line-height: 1.5;
+            overflow-x: hidden !important;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 100;
+            padding: 16px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #888888;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            padding: 20px 0;
+            gap: 16px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 16px;
+        }
+
+        .mobile-nav.show {
+            display: flex;
+        }
+
+        .mobile-nav-link {
+            color: #888888;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 0;
+            transition: color 0.2s;
+        }
+
+        .mobile-nav-link:hover {
+            color: #ffffff;
+        }
+
+        .mobile-nav-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 0 80px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            font-size: 13px;
+            color: #888888;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            font-size: 72px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: #888888;
+            max-width: 600px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+        }
+
+        /* Prompt Box */
+        .prompt-container {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 20px 24px;
+            color: #ffffff;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            resize: none;
+            outline: none;
+        }
+
+        textarea::placeholder {
+            color: #444444;
+        }
+
+        .prompt-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .examples {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .example {
+            font-size: 13px;
+            color: #666666;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .example:hover {
+            color: #ffffff;
+        }
+
+        .build-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .build-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 60px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #666666;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 64px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-link {
+            color: #666666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #ffffff;
+        }
+
+        .copyright {
+            color: #444444;
+            font-size: 13px;
+        }
+
+        /* Waitlist Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #0a0a0a, #0f0f1a);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 24px;
+            max-width: 450px;
+            width: 90%;
+            padding: 32px;
+            position: relative;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .modal h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            margin-bottom: 16px;
+            outline: none;
+        }
+
+        .modal input:focus {
+            border-color: #8b5cf6;
+        }
+
+        .modal button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Desktop */
+        @media (min-width: 769px) {
+            .desktop-nav {
+                display: flex !important;
+            }
+            .mobile-menu-btn {
+                display: none !important;
+            }
+            .mobile-nav {
+                display: none !important;
+            }
+        }
+
+        /* Tablet & Mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px !important;
+            }
+            
+            .desktop-nav {
+                display: none !important;
+            }
+            
+            .mobile-menu-btn {
+                display: block !important;
+            }
+            
+            .header {
+                padding: 12px 0;
+            }
+            
+            .logo span {
+                font-size: 18px;
+            }
+            
+            .logo img {
+                height: 32px;
+            }
+            
+            .hero {
+                padding: 110px 0 60px;
+            }
+            
+            h1 {
+                font-size: 36px !important;
+            }
+            
+            .hero-description {
+                font-size: 15px !important;
+                padding: 0 8px;
+            }
+            
+            .badge {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+            
+            .prompt-container {
+                margin: 0 auto 32px;
+            }
+            
+            textarea {
+                font-size: 14px;
+                padding: 16px;
+            }
+            
+            .prompt-footer {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 16px;
+            }
+            
+            .examples {
+                justify-content: center;
+                gap: 8px;
+            }
+            
+            .example {
+                font-size: 12px;
+                padding: 6px 12px;
+                background: rgba(255,255,255,0.05);
+                border-radius: 20px;
+            }
+            
+            .build-btn {
+                width: 100%;
+                padding: 10px;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 24px;
+                margin-top: 40px;
+            }
+            
+            .stat-number {
+                font-size: 24px;
+            }
+            
+            .stat-label {
+                font-size: 11px;
+            }
+            
+            .footer {
+                padding: 48px 0;
+                margin-top: 40px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .modal-content {
+                padding: 24px;
+                width: 90%;
+            }
+            
+            .modal h2 {
+                font-size: 24px;
+            }
+            
+            .modal p {
+                font-size: 13px;
+            }
+            
+            .modal input {
+                padding: 12px;
+                font-size: 13px;
+            }
+        }
+
+        /* Small Phones */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px !important;
+            }
+            
+            .logo span {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 28px !important;
+            }
+            
+            .hero-description {
+                font-size: 14px !important;
+            }
+            
+            .badge {
+                font-size: 10px;
+            }
+            
+            .example {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            border-radius: 3px;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    
+                    <span>TypeView</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="nav desktop-nav">
+                    <a href="features.html" class="nav-link">Features</a>
+                    <a href="templates.html" class="nav-link">Templates</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                    <button class="btn-outline" onclick="openWaitlistModal()">Join Waitlist</button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav" id="mobileNav">
+                <a href="features.html" class="mobile-nav-link">Features</a>
+                <a href="templates.html" class="mobile-nav-link">Templates</a>
+                <a href="pricing.html" class="mobile-nav-link">Pricing</a>
+                <button class="mobile-nav-btn" onclick="openWaitlistModal()">Join Waitlist</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="badge">Powered by TypeView AI</div>
+                    <h1>Build with AI.<br>Ship with confidence.</h1>
+                    <p class="hero-description">
+                        Transform your ideas into production-ready code. No Tokens Required. The fastest way to build web applications with artificial intelligence.
+                    </p>
+                    
+                    <div class="prompt-container">
+                        <textarea id="promptInput" rows="3" placeholder="Describe what you want to build..."></textarea>
+                        <div class="prompt-footer">
+                            <div class="examples">
+                                <span class="example" onclick="setExample('Create a modern SaaS landing page with pricing tables')">SaaS Landing</span>
+                                <span class="example" onclick="setExample('Build a developer portfolio with project gallery')">Portfolio</span>
+                                <span class="example" onclick="setExample('Design an e-commerce product page with cart')">E-commerce</span>
+                                <span class="example" onclick="setExample('Create an analytics dashboard with charts')">Dashboard</span>
+                            </div>
+                            <button class="build-btn" onclick="buildProject()">Build →</button>
+                        </div>
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">&lt; 500ms</div>
+                            <div class="stat-label">Generation speed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Frameworks supported</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Code ownership</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">© 2024 TypeView. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Documentation</a>
+                    <a href="#" class="footer-link">API Reference</a>
+                    <a href="#" class="footer-link">GitHub</a>
+                    <a href="#" class="footer-link">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Waitlist Modal -->
+    <div id="waitlistModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeWaitlistModal()">✕</button>
+            <div class="text-center mb-4">
+                <div style="font-size: 48px; margin-bottom: 8px;">✨</div>
+                <h2>Join the Waitlist</h2>
+                <p>Be the first to experience TypeView's full potential</p>
+            </div>
+            <form id="waitlistForm">
+                <input type="text" id="waitlistName" placeholder="Your name" autocomplete="name">
+                <input type="email" id="waitlistEmail" placeholder="Email address *" required autocomplete="email">
+                <button type="submit" id="waitlistSubmitBtn">Join Waitlist →</button>
+            </form>
+            <p class="text-center text-xs text-gray-500 mt-4">
+                We'll notify you when early access opens. No spam, ever.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function setExample(text) {
+            document.getElementById('promptInput').value = text;
+        }
+
+        function buildProject() {
+            const prompt = document.getElementById('promptInput').value.trim();
+            if (!prompt) {
+                alert('Please describe what you want to build');
+                return;
+            }
+            localStorage.setItem('builderPrompt', prompt);
+            window.location.href = 'builder.html';
+        }
+
+        function openWaitlistModal() {
+            document.getElementById('waitlistModal').style.display = 'flex';
+        }
+
+        function closeWaitlistModal() {
+            document.getElementById('waitlistModal').style.display = 'none';
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            if (mobileNav) {
+                mobileNav.classList.toggle('show');
+            }
+        }
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-nav-link, .mobile-nav-btn').forEach(link => {
+            link.addEventListener('click', () => {
+                const mobileNav = document.getElementById('mobileNav');
+                if (mobileNav) {
+                    mobileNav.classList.remove('show');
+                }
+            });
+        });
+
+        // Close mobile menu on resize to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                const mobileNav = document.getElementById('mobileNav');
+                if (mobileNav) {
+                    mobileNav.classList.remove('show');
+                }
+            }
+        });
+
+        // Waitlist form submission
+        document.getElementById('waitlistForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('waitlistName').value;
+            const email = document.getElementById('waitlistEmail').value;
+            const btn = document.getElementById('waitlistSubmitBtn');
+            
+            if (!email) {
+                alert('Please enter your email');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Joining...';
+            
+            try {
+                const response = await fetch('http://localhost:3001/api/waitlist/join', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    btn.innerHTML = '✓ Joined! Check your email';
+                    btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                    
+                    setTimeout(() => {
+                        closeWaitlistModal();
+                        document.getElementById('waitlistForm').reset();
+                        btn.disabled = false;
+                        btn.innerHTML = 'Join Waitlist →';
+                        btn.style.background = '';
+                    }, 2000);
+                } else {
+                    alert(data.error || 'Something went wrong');
+                    btn.disabled = false;
+                    btn.innerHTML = 'Join Waitlist →';
+                }
+            } catch (error) {
+                alert('Error joining waitlist. Please try again.');
+                btn.disabled = false;
+                btn.innerHTML = 'Join Waitlist →';
+            }
+        });
+
+        document.getElementById('waitlistModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('waitlistModal')) {
+                closeWaitlistModal();
+            }
+        });
+    </script>
+</body>
+</html>

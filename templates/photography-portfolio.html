@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>James Carter | Fine Art Photography</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #fafafa; color: #1a1a1a; }
+        
+        /* Custom Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-scale { animation: fadeInScale 0.6s ease-out forwards; opacity: 0; }
+        
+        /* Typography */
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        
+        /* Gallery Grid */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #1a1a1a;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Button */
+        .btn-outline-dark {
+            border: 1px solid #1a1a1a;
+            background: transparent;
+            transition: all 0.3s;
+        }
+        .btn-outline-dark:hover {
+            background: #1a1a1a;
+            color: white;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #e5e5e5; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
+        
+        /* Divider */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: #1a1a1a;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-6 px-6 bg-white/90 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-serif font-light tracking-wide">James Carter</div>
+            <div class="hidden md:flex gap-10">
+                <a href="#home" class="nav-link text-gray-800 text-sm uppercase tracking-wider">Home</a>
+                <a href="#portfolio" class="nav-link text-gray-800 text-sm uppercase tracking-wider">Portfolio</a>
+                <a href="#about" class="nav-link text-gray-800 text-sm uppercase tracking-wider">About</a>
+                <a href="#contact" class="nav-link text-gray-800 text-sm uppercase tracking-wider">Contact</a>
+            </div>
+            <button class="hidden md:block text-sm uppercase tracking-wider border-b border-gray-800 pb-1">Fine Art</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20">
+        <div class="absolute inset-0 bg-[#fafafa]"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <div class="mb-8 fade-up">
+                <span class="text-xs uppercase tracking-[0.3em] text-gray-500">Fine Art Photography</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-light mb-6 leading-[1.1] fade-up" style="animation-delay: 0.1s;">
+                James Carter
+            </h1>
+            <div class="divider mb-8 fade-up" style="animation-delay: 0.2s;"></div>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed fade-up" style="animation-delay: 0.3s;">
+                Capturing the beauty of light, shadow, and the moments in between. Fine art and portrait photography based in New York.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center fade-up" style="animation-delay: 0.4s;">
+                <button class="px-8 py-3 btn-outline-dark rounded-none text-sm uppercase tracking-wider">View Portfolio</button>
+                <button class="px-8 py-3 text-sm uppercase tracking-wider border-b border-gray-800 pb-2">Inquire</button>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-gray-400 text-xl"></i>
+        </div>
+    </section>
+
+    <!-- Featured Work -->
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gray-500">Featured Work</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-light mt-4 mb-4">Selected Series</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="gallery-item aspect-[3/4] bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                        <i class="fas fa-camera text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <span class="text-white text-sm uppercase tracking-wider">Urban Silence</span>
+                    </div>
+                </div>
+                <div class="gallery-item aspect-[3/4] bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                        <i class="fas fa-camera text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <span class="text-white text-sm uppercase tracking-wider">Portrait Studies</span>
+                    </div>
+                </div>
+                <div class="gallery-item aspect-[3/4] bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                        <i class="fas fa-camera text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <span class="text-white text-sm uppercase tracking-wider">Abstract Forms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section id="portfolio" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gray-500">Portfolio</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-light mt-4 mb-4">Recent Work</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="gallery-item aspect-square bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                        <i class="fas fa-image text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="text-center text-white">
+                            <p class="text-sm uppercase tracking-wider">Misty Morning</p>
+                            <p class="text-xs text-gray-300 mt-1">2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item aspect-square bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                        <i class="fas fa-image text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="text-center text-white">
+                            <p class="text-sm uppercase tracking-wider">Silhouette</p>
+                            <p class="text-xs text-gray-300 mt-1">2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item aspect-square bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                        <i class="fas fa-image text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="text-center text-white">
+                            <p class="text-sm uppercase tracking-wider">Reflections</p>
+                            <p class="text-xs text-gray-300 mt-1">2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item aspect-square bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                        <i class="fas fa-image text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="text-center text-white">
+                            <p class="text-sm uppercase tracking-wider">Golden Hour</p>
+                            <p class="text-xs text-gray-300 mt-1">2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item aspect-square bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                        <i class="fas fa-image text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="text-center text-white">
+                            <p class="text-sm uppercase tracking-wider">Urban Geometry</p>
+                            <p class="text-xs text-gray-300 mt-1">2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item aspect-square bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                        <i class="fas fa-image text-4xl text-gray-400"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="text-center text-white">
+                            <p class="text-sm uppercase tracking-wider">Quiet Moments</p>
+                            <p class="text-xs text-gray-300 mt-1">2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="px-8 py-3 btn-outline-dark rounded-none text-sm uppercase tracking-wider">View Full Portfolio →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 bg-[#f5f5f5]">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1">
+                    <div class="w-full aspect-[3/4] bg-gray-300 flex items-center justify-center">
+                        <i class="fas fa-user-circle text-7xl text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <span class="text-xs uppercase tracking-[0.3em] text-gray-500">About The Artist</span>
+                    <h2 class="text-3xl md:text-4xl font-serif font-light mt-4 mb-6">James Carter</h2>
+                    <div class="w-12 h-px bg-gray-400 mb-6"></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">James Carter is a fine art and portrait photographer based in New York City. His work explores the interplay between light and shadow, capturing the quiet beauty of everyday moments.</p>
+                    <p class="text-gray-600 leading-relaxed mb-6">With over a decade of experience, James's photographs have been exhibited internationally and featured in publications such as Vogue Italia, Harper's Bazaar, and The New Yorker.</p>
+                    <div class="flex gap-6">
+                        <div><div class="text-2xl font-serif font-light">12+</div><div class="text-xs text-gray-500 uppercase tracking-wider">Years Experience</div></div>
+                        <div><div class="text-2xl font-serif font-light">50+</div><div class="text-xs text-gray-500 uppercase tracking-wider">Exhibitions</div></div>
+                        <div><div class="text-2xl font-serif font-light">30+</div><div class="text-xs text-gray-500 uppercase tracking-wider">Publications</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exhibitions & Publications -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gray-500">Recognition</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-light mt-4 mb-4">Exhibitions & Publications</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <i class="fas fa-landmark text-3xl text-gray-400 mb-4 block"></i>
+                    <h3 class="font-serif text-lg font-medium mb-2">Solo Exhibitions</h3>
+                    <p class="text-gray-500 text-sm">"Light & Shadow" – NYC, 2023<br>"Urban Silence" – London, 2022<br>"Fragments" – Paris, 2021</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-newspaper text-3xl text-gray-400 mb-4 block"></i>
+                    <h3 class="font-serif text-lg font-medium mb-2">Publications</h3>
+                    <p class="text-gray-500 text-sm">Vogue Italia, 2024<br>Harper's Bazaar, 2023<br>The New Yorker, 2023<br>Lens Magazine, 2022</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-trophy text-3xl text-gray-400 mb-4 block"></i>
+                    <h3 class="font-serif text-lg font-medium mb-2">Awards</h3>
+                    <p class="text-gray-500 text-sm">IPA Photography Award, 2023<br>PDN Photo Annual, 2022<br>LensCulture Award, 2021</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 px-6 bg-[#f5f5f5]">
+        <div class="max-w-4xl mx-auto text-center">
+            <i class="fas fa-quote-left text-3xl text-gray-300 mb-6"></i>
+            <p class="text-xl md:text-2xl font-serif font-light text-gray-600 leading-relaxed mb-8">"James Carter has an extraordinary ability to capture the soul of his subjects. His photographs are not just images; they are stories frozen in time."</p>
+            <div class="divider mx-auto mb-6"></div>
+            <p class="text-sm uppercase tracking-wider text-gray-500">— Elena Rossi, Curator, Museum of Modern Art</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="text-xs uppercase tracking-[0.3em] text-gray-500">Inquiries</span>
+            <h2 class="text-3xl md:text-4xl font-serif font-light mt-4 mb-4">Let's Connect</h2>
+            <div class="divider mx-auto mb-8"></div>
+            <p class="text-gray-600 mb-8">For commissions, print sales, or general inquiries, please reach out.</p>
+            <a href="mailto:james@carterphotography.com" class="text-lg font-serif border-b border-gray-800 pb-1 hover:border-gray-400 transition">james@carterphotography.com</a>
+            <div class="flex justify-center gap-8 mt-10">
+                <i class="fab fa-instagram text-gray-400 hover:text-gray-800 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-behance text-gray-400 hover:text-gray-800 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-pinterest text-gray-400 hover:text-gray-800 cursor-pointer transition text-xl"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-xs uppercase tracking-wider text-gray-400">© 2024 James Carter Photography. All rights reserved.</p>
+            <p class="text-xs text-gray-400 mt-2">Fine Art & Portrait Photography</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        
+        // Fade in on scroll
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.gallery-item, .testimonial-card, .text-center').forEach(el => {
+            el.style.opacity = "0";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

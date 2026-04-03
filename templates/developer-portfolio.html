@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Chen | Senior Full-Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #ffffff; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .scale-in { animation: scaleIn 0.5s ease-out forwards; }
+        .slide-left { animation: slideInLeft 0.6s ease-out forwards; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.5);
+        }
+        .skill-tag {
+            transition: all 0.3s;
+        }
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            background: rgba(139, 92, 246, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-5 px-6 bg-black/40 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold gradient-text">Alex Chen</div>
+            <div class="hidden md:flex gap-10">
+                <a href="#" class="text-gray-300 hover:text-white transition">Work</a>
+                <a href="#" class="text-gray-300 hover:text-white transition">Projects</a>
+                <a href="#" class="text-gray-300 hover:text-white transition">Skills</a>
+                <a href="#" class="text-gray-300 hover:text-white transition">Contact</a>
+            </div>
+            <button class="px-6 py-2 gradient-bg rounded-full text-white font-semibold hover:shadow-lg transition">Resume →</button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-pink-900/20"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600 rounded-full filter blur-[150px] opacity-20"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 scale-in">
+                <i class="fas fa-code text-purple-400"></i>
+                <span class="text-sm text-gray-300">Available for freelance work</span>
+            </div>
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 leading-[1.2] slide-left">
+                Crafting digital<br>
+                <span class="gradient-text">experiences that matter</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed fade-up">
+                I'm Alex Chen, a full-stack developer with 7+ years of experience building scalable web applications and beautiful interfaces.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up">
+                <button class="px-8 py-4 gradient-bg rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2 group">
+                    View My Work <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                </button>
+                <button class="px-8 py-4 border border-purple-500/50 rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2 hover:bg-purple-500/10 transition">
+                    <i class="fab fa-github"></i> GitHub
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-purple-400 font-semibold mb-3">FEATURED WORK</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Selected projects</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Each project is crafted with care and attention to detail</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card rounded-2xl overflow-hidden project-card">
+                    <div class="h-64 bg-gradient-to-br from-blue-500/30 to-purple-500/30 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-6xl text-purple-400"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold">Analytics Dashboard</h3>
+                            <span class="px-3 py-1 bg-purple-500/20 rounded-full text-sm">2024</span>
+                        </div>
+                        <p class="text-gray-400 mb-4 leading-relaxed">Real-time analytics platform with custom dashboards, data visualization, and predictive insights for enterprise clients.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">React</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">D3.js</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Node.js</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">PostgreSQL</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <button class="text-purple-400 hover:text-purple-300 transition text-sm font-semibold">Live Demo →</button>
+                            <button class="text-gray-400 hover:text-white transition text-sm font-semibold">Source Code →</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card rounded-2xl overflow-hidden project-card">
+                    <div class="h-64 bg-gradient-to-br from-pink-500/30 to-purple-500/30 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-6xl text-purple-400"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold">EcoTrack</h3>
+                            <span class="px-3 py-1 bg-purple-500/20 rounded-full text-sm">2023</span>
+                        </div>
+                        <p class="text-gray-400 mb-4 leading-relaxed">Sustainability tracking app helping users reduce their carbon footprint with personalized recommendations and insights.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">React Native</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Firebase</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">TensorFlow</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <button class="text-purple-400 hover:text-purple-300 transition text-sm font-semibold">Live Demo →</button>
+                            <button class="text-gray-400 hover:text-white transition text-sm font-semibold">Source Code →</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card rounded-2xl overflow-hidden project-card">
+                    <div class="h-64 bg-gradient-to-br from-green-500/30 to-purple-500/30 flex items-center justify-center">
+                        <i class="fas fa-brain text-6xl text-purple-400"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold">AI Image Generator</h3>
+                            <span class="px-3 py-1 bg-purple-500/20 rounded-full text-sm">2024</span>
+                        </div>
+                        <p class="text-gray-400 mb-4 leading-relaxed">Cutting-edge AI tool that generates high-quality images from text descriptions using Stable Diffusion.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Python</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">FastAPI</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">PyTorch</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">React</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <button class="text-purple-400 hover:text-purple-300 transition text-sm font-semibold">Live Demo →</button>
+                            <button class="text-gray-400 hover:text-white transition text-sm font-semibold">Source Code →</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card rounded-2xl overflow-hidden project-card">
+                    <div class="h-64 bg-gradient-to-br from-orange-500/30 to-purple-500/30 flex items-center justify-center">
+                        <i class="fas fa-cloud-upload-alt text-6xl text-purple-400"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold">CloudFlow</h3>
+                            <span class="px-3 py-1 bg-purple-500/20 rounded-full text-sm">2023</span>
+                        </div>
+                        <p class="text-gray-400 mb-4 leading-relaxed">Serverless deployment platform with CI/CD pipeline, monitoring, and automatic scaling capabilities.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">AWS</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Terraform</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Docker</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Kubernetes</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <button class="text-purple-400 hover:text-purple-300 transition text-sm font-semibold">Live Demo →</button>
+                            <button class="text-gray-400 hover:text-white transition text-sm font-semibold">Source Code →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="py-28 px-6 bg-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-purple-400 font-semibold mb-3">TECH STACK</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Tools & Technologies</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Always learning, always growing</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fab fa-react text-3xl text-blue-400 mb-3 block"></i><span class="text-sm">React</span></div>
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fab fa-node text-3xl text-green-400 mb-3 block"></i><span class="text-sm">Node.js</span></div>
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fab fa-python text-3xl text-yellow-400 mb-3 block"></i><span class="text-sm">Python</span></div>
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fab fa-js text-3xl text-yellow-500 mb-3 block"></i><span class="text-sm">JavaScript</span></div>
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fas fa-database text-3xl text-blue-300 mb-3 block"></i><span class="text-sm">PostgreSQL</span></div>
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fab fa-docker text-3xl text-blue-500 mb-3 block"></i><span class="text-sm">Docker</span></div>
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fab fa-aws text-3xl text-orange-400 mb-3 block"></i><span class="text-sm">AWS</span></div>
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fab fa-git-alt text-3xl text-red-400 mb-3 block"></i><span class="text-sm">Git</span></div>
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fas fa-chart-line text-3xl text-purple-400 mb-3 block"></i><span class="text-sm">D3.js</span></div>
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fab fa-vuejs text-3xl text-green-500 mb-3 block"></i><span class="text-sm">Vue.js</span></div>
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fas fa-mobile-alt text-3xl text-teal-400 mb-3 block"></i><span class="text-sm">React Native</span></div>
+                <div class="glass-card p-6 text-center skill-tag cursor-pointer"><i class="fas fa-cloud text-3xl text-cyan-400 mb-3 block"></i><span class="text-sm">GraphQL</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-purple-400 font-semibold mb-3">TESTIMONIALS</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">What people say</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Loved by clients and colleagues alike</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8">
+                    <i class="fas fa-quote-left text-3xl text-purple-400 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 leading-relaxed mb-6">"Alex transformed our entire platform. The code quality is exceptional and the performance improvements are incredible."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center">JD</div>
+                        <div><div class="font-semibold">John Davis</div><div class="text-sm text-gray-400">CTO, TechCorp</div></div>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                    <i class="fas fa-quote-left text-3xl text-purple-400 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 leading-relaxed mb-6">"One of the best developers I've worked with. Delivered ahead of schedule and exceeded all expectations."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center">SW</div>
+                        <div><div class="font-semibold">Sarah Wilson</div><div class="text-sm text-gray-400">Product Lead, InnovateLabs</div></div>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                    <i class="fas fa-quote-left text-3xl text-purple-400 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 leading-relaxed mb-6">"Incredible attention to detail and deep technical knowledge. Alex is a true asset to any team."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center">MR</div>
+                        <div><div class="font-semibold">Michael Rodriguez</div><div class="text-sm text-gray-400">Engineering Manager, ScaleUp</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="glass-card p-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Let's work together</h2>
+                <p class="text-gray-400 text-lg mb-8">Have a project in mind? I'd love to hear about it.</p>
+                <button class="px-8 py-4 gradient-bg rounded-full text-white font-semibold text-lg inline-flex items-center gap-2 group">
+                    Get in touch <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto text-center text-gray-500 text-sm">© 2024 Alex Chen. All rights reserved.</div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Pro X | Premium Wireless Headphones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        .pulse { animation: pulse 1.5s ease-in-out infinite; }
+        .hover-lift { transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+        .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15); }
+        
+        .gradient-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .rating-star {
+            color: #fbbf24;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">AudioPro</div>
+            <div class="hidden md:flex gap-8">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Shop</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">New Arrivals</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Sale</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Support</a>
+            </div>
+            <div class="flex gap-4">
+                <i class="fas fa-search text-gray-600 hover:text-gray-900 cursor-pointer text-xl"></i>
+                <i class="fas fa-shopping-cart text-gray-600 hover:text-gray-900 cursor-pointer text-xl relative">
+                    <span class="absolute -top-2 -right-2 bg-purple-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">2</span>
+                </i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Section -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div class="grid md:grid-cols-2 gap-12">
+            <!-- Product Gallery -->
+            <div class="space-y-4">
+                <div class="bg-gradient-to-br from-purple-100 to-blue-100 rounded-3xl p-8 flex items-center justify-center">
+                    <i class="fas fa-headphones text-9xl text-purple-600"></i>
+                </div>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="bg-gray-100 rounded-xl p-3 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition"><i class="fas fa-headphones text-2xl text-gray-600"></i></div>
+                    <div class="bg-gray-100 rounded-xl p-3 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition"><i class="fas fa-bluetooth text-2xl text-gray-600"></i></div>
+                    <div class="bg-gray-100 rounded-xl p-3 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition"><i class="fas fa-battery-full text-2xl text-gray-600"></i></div>
+                    <div class="bg-gray-100 rounded-xl p-3 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition"><i class="fas fa-microphone text-2xl text-gray-600"></i></div>
+                </div>
+            </div>
+            
+            <!-- Product Info -->
+            <div class="fade-in">
+                <div class="inline-flex items-center gap-2 mb-4">
+                    <span class="px-3 py-1 gradient-badge text-white text-xs rounded-full">BESTSELLER</span>
+                    <span class="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">In Stock</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Studio Pro X Wireless Headphones</h1>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="flex rating-star">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="text-gray-500">(4,892 reviews)</span>
+                    <span class="text-green-600 font-semibold">Verified Purchase</span>
+                </div>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Experience audio like never before with our flagship wireless headphones. Featuring active noise cancellation, 40-hour battery life, and studio-quality sound that brings your music to life.
+                </p>
+                <div class="mb-6">
+                    <div class="text-4xl font-bold text-gray-900">$349.99</div>
+                    <div class="text-sm text-gray-500 line-through">$499.99</div>
+                    <div class="text-green-600 font-semibold mt-1">Save $150 (30% off)</div>
+                </div>
+                
+                <!-- Color Options -->
+                <div class="mb-6">
+                    <div class="text-sm font-semibold text-gray-700 mb-2">Color</div>
+                    <div class="flex gap-3">
+                        <button class="w-10 h-10 bg-black rounded-full border-2 border-gray-300 hover:scale-110 transition"></button>
+                        <button class="w-10 h-10 bg-gray-400 rounded-full border-2 border-gray-300 hover:scale-110 transition"></button>
+                        <button class="w-10 h-10 bg-blue-600 rounded-full border-2 border-gray-300 hover:scale-110 transition"></button>
+                        <button class="w-10 h-10 bg-rose-500 rounded-full border-2 border-gray-300 hover:scale-110 transition"></button>
+                    </div>
+                </div>
+                
+                <!-- Quantity & Add to Cart -->
+                <div class="flex gap-4 mb-8">
+                    <div class="flex border border-gray-300 rounded-xl overflow-hidden">
+                        <button class="px-4 py-3 hover:bg-gray-100 transition">-</button>
+                        <input type="number" value="1" class="w-12 text-center border-x border-gray-300 outline-none">
+                        <button class="px-4 py-3 hover:bg-gray-100 transition">+</button>
+                    </div>
+                    <button class="flex-1 gradient-bg text-white py-3 rounded-xl font-semibold hover:shadow-lg transition flex items-center justify-center gap-2 group">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Features -->
+                <div class="grid grid-cols-2 gap-4 pt-6 border-t border-gray-200">
+                    <div class="flex items-center gap-2"><i class="fas fa-battery-full text-purple-600"></i><span class="text-sm">40-hour battery</span></div>
+                    <div class="flex items-center gap-2"><i class="fas fa-bolt text-purple-600"></i><span class="text-sm">Fast charging</span></div>
+                    <div class="flex items-center gap-2"><i class="fas fa-microphone text-purple-600"></i><span class="text-sm">Noise cancellation</span></div>
+                    <div class="flex items-center gap-2"><i class="fas fa-bluetooth text-purple-600"></i><span class="text-sm">Bluetooth 5.3</span></div>
+                    <div class="flex items-center gap-2"><i class="fas fa-headphones text-purple-600"></i><span class="text-sm">Spatial audio</span></div>
+                    <div class="flex items-center gap-2"><i class="fas fa-shield-alt text-purple-600"></i><span class="text-sm">2-year warranty</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reviews -->
+        <div class="mt-20">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Customer Reviews</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-md hover-lift">
+                    <div class="flex rating-star mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 mb-4">"Absolutely incredible! The sound quality is unmatched and they're so comfortable to wear for hours."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center"><i class="fas fa-user text-purple-600"></i></div>
+                        <div><div class="font-semibold">Sarah Johnson</div><div class="text-xs text-gray-400">Verified Buyer</div></div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-md hover-lift">
+                    <div class="flex rating-star mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 mb-4">"Best headphones I've ever owned. The noise cancellation is a game-changer for travel."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"><i class="fas fa-user text-blue-600"></i></div>
+                        <div><div class="font-semibold">Michael Chen</div><div class="text-xs text-gray-400">Verified Buyer</div></div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-md hover-lift">
+                    <div class="flex rating-star mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    <p class="text-gray-600 mb-4">"Amazing build quality and the battery lasts forever. Highly recommend!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"><i class="fas fa-user text-green-600"></i></div>
+                        <div><div class="font-semibold">Emma Rodriguez</div><div class="text-xs text-gray-400">Verified Buyer</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Related Products -->
+        <div class="mt-20">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">You May Also Like</h2>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-2xl p-4 shadow-md hover-lift cursor-pointer">
+                    <div class="bg-gray-100 rounded-xl h-32 flex items-center justify-center mb-3"><i class="fas fa-headphones text-4xl text-gray-400"></i></div>
+                    <h3 class="font-semibold">Wireless Earbuds</h3>
+                    <div class="text-purple-600 font-bold">$149.99</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 shadow-md hover-lift cursor-pointer">
+                    <div class="bg-gray-100 rounded-xl h-32 flex items-center justify-center mb-3"><i class="fas fa-music text-4xl text-gray-400"></i></div>
+                    <h3 class="font-semibold">Portable Speaker</h3>
+                    <div class="text-purple-600 font-bold">$199.99</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 shadow-md hover-lift cursor-pointer">
+                    <div class="bg-gray-100 rounded-xl h-32 flex items-center justify-center mb-3"><i class="fas fa-microphone text-4xl text-gray-400"></i></div>
+                    <h3 class="font-semibold">Gaming Headset</h3>
+                    <div class="text-purple-600 font-bold">$179.99</div>
+                </div>
+                <div class="bg-white rounded-2xl p-4 shadow-md hover-lift cursor-pointer">
+                    <div class="bg-gray-100 rounded-xl h-32 flex items-center justify-center mb-3"><i class="fas fa-charging-station text-4xl text-gray-400"></i></div>
+                    <h3 class="font-semibold">Wireless Charger</h3>
+                    <div class="text-purple-600 font-bold">$49.99</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-20 py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center text-gray-400">© 2024 AudioPro. All rights reserved.</div>
+    </footer>
+</body>
+</html>

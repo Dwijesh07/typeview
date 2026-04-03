@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morning Dew | Artisan Coffee & Bakery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #faf7f2; color: #4a3b2c; }
+        
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes steam {
+            0% { transform: translateY(0) scale(1); opacity: 0.4; }
+            100% { transform: translateY(-30px) scale(1.5); opacity: 0; }
+        }
+        @keyframes gentlePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(190, 115, 105, 0.2); }
+            50% { box-shadow: 0 0 0 20px rgba(190, 115, 105, 0); }
+        }
+        
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-scale { animation: fadeInScale 0.6s ease-out forwards; opacity: 0; }
+        .float { animation: float 6s ease-in-out infinite; }
+        .steam { animation: steam 3s ease-out infinite; }
+        .gentle-pulse { animation: gentlePulse 2s infinite; }
+        
+        /* New Gradient Styles - Dusty Rose & Sage */
+        .gradient-soft {
+            background: linear-gradient(135deg, #f5ede8 0%, #e8e0d8 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #be7369 0%, #8b9a6e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Card Styles */
+        .card-soft {
+            background: white;
+            border-radius: 32px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+        .card-soft:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -12px rgba(190, 115, 105, 0.15);
+        }
+        
+        /* Menu Item */
+        .menu-item {
+            border-bottom: 1px solid #e8dfd6;
+            transition: all 0.3s;
+        }
+        .menu-item:hover {
+            border-bottom-color: #be7369;
+            padding-left: 8px;
+        }
+        
+        /* Button Styles */
+        .btn-primary-soft {
+            background: linear-gradient(135deg, #be7369, #8b9a6e);
+            transition: all 0.3s;
+            color: white;
+        }
+        .btn-primary-soft:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(190, 115, 105, 0.4);
+        }
+        .btn-outline-soft {
+            border: 1px solid #be7369;
+            color: #be7369;
+            transition: all 0.3s;
+        }
+        .btn-outline-soft:hover {
+            background: rgba(190, 115, 105, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #be7369, #8b9a6e);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Coffee Steam Effect */
+        .coffee-cup {
+            position: relative;
+            display: inline-block;
+        }
+        .steam-line {
+            position: absolute;
+            bottom: 70%;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: rgba(190, 115, 105, 0.3);
+            border-radius: 2px;
+            transform: translateX(-50%);
+            animation: steam 2.5s ease-out infinite;
+        }
+        .steam-line:nth-child(2) { left: 45%; animation-delay: 0.5s; height: 25px; }
+        .steam-line:nth-child(3) { left: 55%; animation-delay: 1s; height: 15px; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5ede8; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #be7369, #8b9a6e); border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-5 px-6 bg-white/95 backdrop-blur-sm shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold font-['Playfair_Display']">
+                <span class="gradient-text">Morning Dew</span>
+            </div>
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link text-gray-700 hover:text-[#be7369] transition">Home</a>
+                <a href="#menu" class="nav-link text-gray-700 hover:text-[#be7369] transition">Menu</a>
+                <a href="#about" class="nav-link text-gray-700 hover:text-[#be7369] transition">Our Story</a>
+                <a href="#events" class="nav-link text-gray-700 hover:text-[#be7369] transition">Events</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-[#be7369] transition">Contact</a>
+            </div>
+            <button class="px-6 py-2 btn-primary-soft rounded-full text-white font-semibold">Order Online</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 gradient-soft"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23be7369" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-[#be7369]/20 mb-8 fade-up">
+                <span class="w-2 h-2 bg-[#be7369] rounded-full animate-pulse"></span>
+                <span class="text-sm text-[#be7369]">Artisan Coffee Since 2018</span>
+            </div>
+            <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[1.2] font-['Playfair_Display'] fade-up" style="animation-delay: 0.1s;">
+                Sip. Savor.<br>
+                <span class="gradient-text">Slow Down.</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed fade-up" style="animation-delay: 0.2s;">
+                Handcrafted coffee, freshly baked pastries, and a warm atmosphere. Your neighborhood sanctuary for the perfect pause.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up" style="animation-delay: 0.3s;">
+                <button class="px-8 py-4 btn-primary-soft rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2 group">
+                    View Menu <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                </button>
+                <button class="px-8 py-4 btn-outline-soft rounded-full font-semibold text-lg flex items-center justify-center gap-2">
+                    <i class="fas fa-map-marker-alt"></i> Find Us
+                </button>
+            </div>
+            <div class="mt-12 flex flex-wrap justify-center gap-8 fade-up" style="animation-delay: 0.4s;">
+                <div class="text-center"><div class="text-2xl font-bold gradient-text">Mon - Sun</div><div class="text-sm text-gray-500">7:30 AM - 7:00 PM</div></div>
+                <div class="text-center"><div class="text-2xl font-bold gradient-text">Free Wi-Fi</div><div class="text-sm text-gray-500">Cozy Corners</div></div>
+                <div class="text-center"><div class="text-2xl font-bold gradient-text">Garden Patio</div><div class="text-sm text-gray-500">Pet Friendly</div></div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-[#be7369] text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Featured Drinks -->
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-[#be7369] font-semibold mb-3 tracking-wider">SIGNATURE BREWS</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5 font-['Playfair_Display']">Customer Favorites</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Our most loved creations, crafted with passion</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-soft p-6 text-center">
+                    <div class="coffee-cup mb-4">
+                        <div class="steam-line"></div>
+                        <div class="steam-line"></div>
+                        <div class="steam-line"></div>
+                        <div class="w-24 h-24 rounded-full bg-[#f5ede8] flex items-center justify-center mx-auto">
+                            <i class="fas fa-mug-hot text-4xl text-[#be7369]"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Lavender Honey Latte</h3>
+                    <p class="text-gray-500 text-sm mb-3">Espresso, steamed milk, lavender, local honey</p>
+                    <div class="text-2xl font-bold text-[#be7369]">$5.75</div>
+                </div>
+                <div class="card-soft p-6 text-center">
+                    <div class="coffee-cup mb-4">
+                        <div class="steam-line"></div>
+                        <div class="steam-line"></div>
+                        <div class="steam-line"></div>
+                        <div class="w-24 h-24 rounded-full bg-[#f5ede8] flex items-center justify-center mx-auto">
+                            <i class="fas fa-mug-hot text-4xl text-[#be7369]"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Salted Caramel Mocha</h3>
+                    <p class="text-gray-500 text-sm mb-3">Rich chocolate, espresso, sea salt caramel</p>
+                    <div class="text-2xl font-bold text-[#be7369]">$5.50</div>
+                </div>
+                <div class="card-soft p-6 text-center">
+                    <div class="coffee-cup mb-4">
+                        <div class="steam-line"></div>
+                        <div class="steam-line"></div>
+                        <div class="steam-line"></div>
+                        <div class="w-24 h-24 rounded-full bg-[#f5ede8] flex items-center justify-center mx-auto">
+                            <i class="fas fa-mug-hot text-4xl text-[#be7369]"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Vanilla Bean Cold Brew</h3>
+                    <p class="text-gray-500 text-sm mb-3">Slow-steeped cold brew, vanilla bean, oat milk</p>
+                    <div class="text-2xl font-bold text-[#be7369]">$5.25</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-24 px-6 bg-[#faf7f2]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-[#be7369] font-semibold mb-3 tracking-wider">OUR MENU</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5 font-['Playfair_Display']">Coffee & Treats</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Freshly brewed daily, baked with love</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Coffee Menu -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2 border-[#be7369] inline-block">Coffee</h3>
+                    <div class="space-y-4 mt-6">
+                        <div class="menu-item pb-4"><div class="flex justify-between"><div><h4 class="font-bold text-lg">Single Origin Espresso</h4><p class="text-gray-500 text-sm">Ethiopian Yirgacheffe, bright and floral</p></div><span class="font-bold text-[#be7369]">$3.50</span></div></div>
+                        <div class="menu-item pb-4"><div class="flex justify-between"><div><h4 class="font-bold text-lg">Honey Oat Latte</h4><p class="text-gray-500 text-sm">Oat milk, local honey, cinnamon</p></div><span class="font-bold text-[#be7369]">$5.25</span></div></div>
+                        <div class="menu-item pb-4"><div class="flex justify-between"><div><h4 class="font-bold text-lg">Cortado</h4><p class="text-gray-500 text-sm">Equal parts espresso and steamed milk</p></div><span class="font-bold text-[#be7369]">$4.25</span></div></div>
+                        <div class="menu-item pb-4"><div class="flex justify-between"><div><h4 class="font-bold text-lg">Matcha Latte</h4><p class="text-gray-500 text-sm">Ceremonial grade matcha, oat milk</p></div><span class="font-bold text-[#be7369]">$5.50</span></div></div>
+                        <div class="menu-item pb-4"><div class="flex justify-between"><div><h4 class="font-bold text-lg">Dirty Chai</h4><p class="text-gray-500 text-sm">Spiced chai with a shot of espresso</p></div><span class="font-bold text-[#be7369]">$5.75</span></div></div>
+                    </div>
+                </div>
+                
+                <!-- Bakery Menu -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 pb-2 border-b-2 border-[#be7369] inline-block">Fresh Bakery</h3>
+                    <div class="space-y-4 mt-6">
+                        <div class="menu-item pb-4"><div class="flex justify-between"><div><h4 class="font-bold text-lg">Almond Croissant</h4><p class="text-gray-500 text-sm">Buttery layers, almond cream, sliced almonds</p></div><span class="font-bold text-[#be7369]">$4.75</span></div></div>
+                        <div class="menu-item pb-4"><div class="flex justify-between"><div><h4 class="font-bold text-lg">Blueberry Lavender Scone</h4><p class="text-gray-500 text-sm">Fresh blueberries, lavender glaze</p></div><span class="font-bold text-[#be7369]">$4.25</span></div></div>
+                        <div class="menu-item pb-4"><div class="flex justify-between"><div><h4 class="font-bold text-lg">Cinnamon Roll</h4><p class="text-gray-500 text-sm">Warm, gooey, cream cheese icing</p></div><span class="font-bold text-[#be7369]">$4.75</span></div></div>
+                        <div class="menu-item pb-4"><div class="flex justify-between"><div><h4 class="font-bold text-lg">Morning Bun</h4><p class="text-gray-500 text-sm">Orange zest, cinnamon sugar</p></div><span class="font-bold text-[#be7369]">$3.75</span></div></div>
+                        <div class="menu-item pb-4"><div class="flex justify-between"><div><h4 class="font-bold text-lg">Vegan Banana Bread</h4><p class="text-gray-500 text-sm">Gluten-free option available</p></div><span class="font-bold text-[#be7369]">$4.50</span></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="px-8 py-3 btn-outline-soft rounded-full font-semibold">View Full Menu →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <p class="text-[#be7369] font-semibold mb-3 tracking-wider">OUR STORY</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 font-['Playfair_Display']">A Place to Pause & Connect</h2>
+                    <p class="text-gray-600 leading-relaxed mb-4">Morning Dew began as a dream to create a space where coffee becomes a moment of peace. What started as a small corner cart has grown into a beloved gathering place.</p>
+                    <p class="text-gray-600 leading-relaxed mb-6">We partner with women-owned farms in Colombia and Rwanda, roasting in small batches to preserve each bean's unique character. Every cup is brewed with intention by our passionate team.</p>
+                    <div class="flex gap-6">
+                        <div><div class="text-2xl font-bold text-[#be7369]">7+</div><div class="text-sm text-gray-500">Years Serving</div></div>
+                        <div><div class="text-2xl font-bold text-[#be7369]">35K+</div><div class="text-sm text-gray-500">Happy Customers</div></div>
+                        <div><div class="text-2xl font-bold text-[#be7369]">100%</div><div class="text-sm text-gray-500">Direct Trade</div></div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <div class="bg-[#f5ede8] rounded-3xl p-8 relative">
+                        <div class="absolute -top-4 -right-4 w-20 h-20 bg-[#be7369]/10 rounded-full"></div>
+                        <i class="fas fa-quote-left text-4xl text-[#be7369] mb-4 block"></i>
+                        <p class="text-gray-700 italic text-lg leading-relaxed mb-6">"Coffee is our invitation to slow down. Every cup we serve is a moment of connection."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-[#be7369] flex items-center justify-center"><i class="fas fa-user text-white"></i></div>
+                            <div><div class="font-bold">Elena Vasquez</div><div class="text-sm text-gray-500">Founder & Head Roaster</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="py-24 px-6 bg-[#faf7f2]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-[#be7369] font-semibold mb-3 tracking-wider">UPCOMING</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5 font-['Playfair_Display']">Events & Workshops</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Join us for unique experiences</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-soft p-6">
+                    <div class="w-16 h-16 rounded-full bg-[#f5ede8] flex items-center justify-center mb-4">
+                        <i class="fas fa-mug-hot text-2xl text-[#be7369]"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Coffee Tasting</h3>
+                    <p class="text-sm text-[#be7369] mb-2">Every Saturday • 10 AM</p>
+                    <p class="text-gray-500 text-sm mb-4">Sample single-origin beans from Ethiopia, Colombia, and Rwanda.</p>
+                    <button class="text-[#be7369] text-sm font-semibold">Learn More →</button>
+                </div>
+                <div class="card-soft p-6">
+                    <div class="w-16 h-16 rounded-full bg-[#f5ede8] flex items-center justify-center mb-4">
+                        <i class="fas fa-paintbrush-fine text-2xl text-[#be7369]"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Latte Art Workshop</h3>
+                    <p class="text-sm text-[#be7369] mb-2">First Sunday • 2 PM</p>
+                    <p class="text-gray-500 text-sm mb-4">Create beautiful designs in your latte with our skilled baristas.</p>
+                    <button class="text-[#be7369] text-sm font-semibold">Learn More →</button>
+                </div>
+                <div class="card-soft p-6">
+                    <div class="w-16 h-16 rounded-full bg-[#f5ede8] flex items-center justify-center mb-4">
+                        <i class="fas fa-music text-2xl text-[#be7369]"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Open Mic Night</h3>
+                    <p class="text-sm text-[#be7369] mb-2">Every Friday • 7 PM</p>
+                    <p class="text-gray-500 text-sm mb-4">Local musicians, poets, and storytellers share their craft.</p>
+                    <button class="text-[#be7369] text-sm font-semibold">Learn More →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-[#be7369] font-semibold mb-3 tracking-wider">LOVED BY THE COMMUNITY</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5 font-['Playfair_Display']">What Our Customers Say</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">The heart of Morning Dew is our community</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-soft p-6">
+                    <div class="flex text-[#be7369] mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"The lavender honey latte is pure magic. The atmosphere is so peaceful—my favorite spot to start the day."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[#f5ede8] flex items-center justify-center"><i class="fas fa-user text-[#be7369]"></i></div>
+                        <div><div class="font-semibold">Sophia Martinez</div><div class="text-xs text-gray-400">Regular Customer</div></div>
+                    </div>
+                </div>
+                <div class="card-soft p-6">
+                    <div class="flex text-[#be7369] mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"The oat milk latte is perfection. The baristas are so warm and welcoming. Feels like a second home."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[#f5ede8] flex items-center justify-center"><i class="fas fa-user text-[#be7369]"></i></div>
+                        <div><div class="font-semibold">James Wilson</div><div class="text-xs text-gray-400">Morning Regular</div></div>
+                    </div>
+                </div>
+                <div class="card-soft p-6">
+                    <div class="flex text-[#be7369] mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"Perfect for working or catching up with friends. The garden patio is a hidden gem, and the pastries are incredible."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[#f5ede8] flex items-center justify-center"><i class="fas fa-user text-[#be7369]"></i></div>
+                        <div><div class="font-semibold">Olivia Chen</div><div class="text-xs text-gray-400">Freelancer</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Location -->
+    <section id="contact" class="py-24 px-6 bg-[#faf7f2]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <p class="text-[#be7369] font-semibold mb-3 tracking-wider">VISIT US</p>
+                    <h2 class="text-4xl font-bold mb-6 font-['Playfair_Display']">Find Your Sanctuary</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4"><i class="fas fa-map-marker-alt text-[#be7369] text-xl mt-1"></i><div><p class="font-semibold">Location</p><p class="text-gray-600">456 Oak Avenue, Downtown, CA 94105</p></div></div>
+                        <div class="flex items-start gap-4"><i class="fas fa-clock text-[#be7369] text-xl mt-1"></i><div><p class="font-semibold">Hours</p><p class="text-gray-600">Monday - Sunday: 7:30 AM - 7:00 PM</p></div></div>
+                        <div class="flex items-start gap-4"><i class="fas fa-phone-alt text-[#be7369] text-xl mt-1"></i><div><p class="font-semibold">Call Us</p><p class="text-gray-600">+1 (555) 987-6543</p></div></div>
+                        <div class="flex items-start gap-4"><i class="fas fa-envelope text-[#be7369] text-xl mt-1"></i><div><p class="font-semibold">Email</p><p class="text-gray-600">hello@morningdew.com</p></div></div>
+                    </div>
+                    <div class="flex gap-4 mt-6">
+                        <i class="fab fa-instagram text-2xl text-gray-400 hover:text-[#be7369] cursor-pointer transition"></i>
+                        <i class="fab fa-facebook text-2xl text-gray-400 hover:text-[#be7369] cursor-pointer transition"></i>
+                        <i class="fab fa-pinterest text-2xl text-gray-400 hover:text-[#be7369] cursor-pointer transition"></i>
+                    </div>
+                </div>
+                <div class="bg-[#f5ede8] rounded-3xl p-8">
+                    <h3 class="text-xl font-bold mb-4">Join Our Circle</h3>
+                    <p class="text-gray-600 text-sm mb-4">Get updates on new roasts, events, and exclusive offers</p>
+                    <div class="flex gap-3">
+                        <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#be7369]">
+                        <button class="px-6 py-3 btn-primary-soft rounded-xl text-white font-semibold">Subscribe</button>
+                    </div>
+                    <div class="mt-8 text-center text-sm text-gray-500">Follow us @morningdewcoffee for daily inspiration</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-[#3a2c21] text-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-2xl font-bold font-['Playfair_Display']">Morning Dew</div>
+            <div class="text-gray-400 text-sm text-center">© 2024 Morning Dew Coffee House. All rights reserved.<br class="md:hidden"> Artisan coffee since 2018</div>
+            <div class="text-gray-400 text-sm">Made with <i class="fas fa-heart text-[#be7369]"></i> for coffee lovers</div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        
+        const subscribeBtn = document.querySelector('.btn-primary-soft');
+        if (subscribeBtn) {
+            subscribeBtn.addEventListener('click', () => {
+                alert('Thank you for subscribing! Check your inbox for updates.');
+            });
+        }
+    </script>
+</body>
+</html>

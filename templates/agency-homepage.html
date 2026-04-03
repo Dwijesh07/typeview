@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus | Digital Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a1a1a; color: #ffffff; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        @keyframes glowPulse { 0%,100% { box-shadow: 0 0 20px rgba(20, 184, 166, 0.3); } 50% { box-shadow: 0 0 50px rgba(20, 184, 166, 0.6); } }
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .float { animation: float 5s ease-in-out infinite; }
+        .glow-pulse { animation: glowPulse 3s ease-in-out infinite; }
+        .gradient-teal-coral { background: linear-gradient(135deg, #14b8a6, #f97316); }
+        .gradient-text-teal { background: linear-gradient(135deg, #2dd4bf, #fb923c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-card { background: rgba(20, 184, 166, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(20, 184, 166, 0.2); border-radius: 28px; transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+        .glass-card:hover { transform: translateY(-8px); border-color: rgba(20, 184, 166, 0.5); box-shadow: 0 25px 40px -12px rgba(20, 184, 166, 0.2); }
+        .btn-teal { background: linear-gradient(135deg, #14b8a6, #f97316); transition: all 0.3s; }
+        .btn-teal:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(20, 184, 166, 0.5); }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-5 px-6 bg-black/40 backdrop-blur-xl border-b border-teal-500/20">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold"><span class="gradient-text-teal">Nexus</span></div>
+            <div class="hidden md:flex gap-10">
+                <a href="#" class="text-gray-300 hover:text-teal-400 transition">Work</a>
+                <a href="#" class="text-gray-300 hover:text-teal-400 transition">Services</a>
+                <a href="#" class="text-gray-300 hover:text-teal-400 transition">About</a>
+                <a href="#" class="text-gray-300 hover:text-teal-400 transition">Insights</a>
+            </div>
+            <button class="px-6 py-2 btn-teal rounded-full text-white font-semibold">Let's Talk →</button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 bg-gradient-to-br from-teal-900/30 via-transparent to-orange-900/30"></div>
+        <div class="absolute top-20 left-10 w-96 h-96 bg-teal-500 rounded-full filter blur-[120px] opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-orange-500 rounded-full filter blur-[120px] opacity-20 animate-pulse"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-500/10 border border-teal-500/20 mb-8 fade-up">
+                <span class="w-2 h-2 bg-teal-400 rounded-full animate-pulse"></span>
+                <span class="text-sm text-teal-300">#1 Digital Agency 2024</span>
+            </div>
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 leading-[1.2] fade-up" style="animation-delay: 0.1s;">We create digital<br><span class="gradient-text-teal">experiences that matter</span></h1>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed fade-up" style="animation-delay: 0.2s;">Strategy, design, and development — we help brands stand out in a crowded digital world. Trusted by 500+ companies globally.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up" style="animation-delay: 0.3s;">
+                <button class="px-8 py-4 btn-teal rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2 group">View Our Work <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i></button>
+                <button class="px-8 py-4 border border-teal-500/50 rounded-full text-white font-semibold text-lg hover:bg-teal-500/10 transition">Get in touch</button>
+            </div>
+            <div class="mt-16 flex flex-wrap justify-center gap-12 fade-up" style="animation-delay: 0.4s;">
+                <div><div class="text-3xl font-bold gradient-text-teal">500+</div><div class="text-gray-400">Projects Delivered</div></div>
+                <div><div class="text-3xl font-bold gradient-text-teal">98%</div><div class="text-gray-400">Client Retention</div></div>
+                <div><div class="text-3xl font-bold gradient-text-teal">24/7</div><div class="text-gray-400">Support</div></div>
+                <div><div class="text-3xl font-bold gradient-text-teal">15+</div><div class="text-gray-400">Industry Awards</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-teal-400 font-semibold mb-3 tracking-wider">WHAT WE DO</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Comprehensive digital solutions</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">From strategy to execution, we've got you covered</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8">
+                    <div class="w-14 h-14 rounded-2xl bg-teal-500/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-paintbrush-fine text-2xl text-teal-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Brand Strategy</h3>
+                    <p class="text-gray-400 leading-relaxed mb-4">Data-driven positioning that resonates with your audience and sets you apart from competitors.</p>
+                    <div class="text-teal-400 text-sm font-semibold mt-4">Learn more →</div>
+                </div>
+                
+                <div class="glass-card p-8">
+                    <div class="w-14 h-14 rounded-2xl bg-teal-500/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-2xl text-teal-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Web Development</h3>
+                    <p class="text-gray-400 leading-relaxed mb-4">Fast, scalable, and beautiful digital experiences built with the latest technologies.</p>
+                    <div class="text-teal-400 text-sm font-semibold mt-4">Learn more →</div>
+                </div>
+                
+                <div class="glass-card p-8">
+                    <div class="w-14 h-14 rounded-2xl bg-teal-500/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-2xl text-teal-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Growth Marketing</h3>
+                    <p class="text-gray-400 leading-relaxed mb-4">Proven strategies to scale your business and drive measurable ROI.</p>
+                    <div class="text-teal-400 text-sm font-semibold mt-4">Learn more →</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Work -->
+    <section class="py-28 px-6 bg-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-teal-400 font-semibold mb-3">FEATURED WORK</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Projects that inspire</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">See how we've helped brands transform their digital presence</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card overflow-hidden group cursor-pointer">
+                    <div class="h-64 bg-gradient-to-br from-teal-500/20 to-orange-500/20 flex items-center justify-center">
+                        <i class="fas fa-store text-7xl text-teal-400 group-hover:scale-110 transition duration-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold">E-Commerce Platform</h3>
+                            <span class="px-2 py-1 bg-teal-500/20 rounded-full text-xs">2024</span>
+                        </div>
+                        <p class="text-gray-400 text-sm">A complete redesign and rebuild for a leading fashion retailer, resulting in 156% increase in conversions.</p>
+                    </div>
+                </div>
+                <div class="glass-card overflow-hidden group cursor-pointer">
+                    <div class="h-64 bg-gradient-to-br from-orange-500/20 to-teal-500/20 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-7xl text-teal-400 group-hover:scale-110 transition duration-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold">Fintech App</h3>
+                            <span class="px-2 py-1 bg-teal-500/20 rounded-full text-xs">2024</span>
+                        </div>
+                        <p class="text-gray-400 text-sm">Mobile-first banking experience used by over 500,000 customers with 4.8/5 star rating.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-teal-400 font-semibold mb-3">TESTIMONIALS</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">What our clients say</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Trusted by industry leaders worldwide</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8">
+                    <i class="fas fa-quote-left text-3xl text-teal-400 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 leading-relaxed mb-6">"Nexus transformed our digital presence completely. The team's strategic approach and execution were exceptional."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><i class="fas fa-user text-teal-400"></i></div>
+                        <div><div class="font-semibold">Sarah Johnson</div><div class="text-sm text-gray-400">CEO, TechCorp</div></div>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                    <i class="fas fa-quote-left text-3xl text-teal-400 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 leading-relaxed mb-6">"Working with Nexus was a game-changer for our brand. Their creativity and technical expertise are unmatched."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><i class="fas fa-user text-teal-400"></i></div>
+                        <div><div class="font-semibold">Michael Chen</div><div class="text-sm text-gray-400">CMO, InnovateLabs</div></div>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                    <i class="fas fa-quote-left text-3xl text-teal-400 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 leading-relaxed mb-6">"Best agency we've ever partnered with. They delivered ahead of schedule and exceeded all expectations."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center"><i class="fas fa-user text-teal-400"></i></div>
+                        <div><div class="font-semibold">Emma Rodriguez</div><div class="text-sm text-gray-400">Founder, StyleHub</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="glass-card p-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to elevate your brand?</h2>
+                <p class="text-gray-400 text-lg mb-8">Let's create something extraordinary together.</p>
+                <button class="px-8 py-4 btn-teal rounded-full text-white font-semibold text-lg">Start a Project →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-teal-500/20">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-2xl font-bold gradient-text-teal">Nexus</div>
+            <div class="flex gap-8">
+                <i class="fab fa-twitter text-gray-500 hover:text-teal-400 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-linkedin text-gray-500 hover:text-teal-400 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-instagram text-gray-500 hover:text-teal-400 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-dribbble text-gray-500 hover:text-teal-400 cursor-pointer transition text-xl"></i>
+            </div>
+            <div class="text-gray-500 text-sm">© 2024 Nexus Agency. All rights reserved.</div>
+        </div>
+    </footer>
+</body>
+</html>

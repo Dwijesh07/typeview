@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet | Luxury Fashion Boutique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #fefaf5; color: #1e1b2e; }
+        
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-left { animation: fadeInLeft 0.6s ease-out forwards; opacity: 0; }
+        .fade-right { animation: fadeInRight 0.6s ease-out forwards; opacity: 0; }
+        .scale-in { animation: scaleIn 0.5s ease-out forwards; opacity: 0; }
+        
+        /* Gradient Styles */
+        .gradient-luxury {
+            background: linear-gradient(135deg, #991b1b 0%, #be185d 50%, #7c2d12 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #991b1b 0%, #be185d 70%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Card Styles */
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 40px -12px rgba(153, 27, 27, 0.2);
+        }
+        
+        /* Button Styles */
+        .btn-primary-luxury {
+            background: linear-gradient(135deg, #991b1b, #be185d);
+            transition: all 0.3s;
+            color: white;
+        }
+        .btn-primary-luxury:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(153, 27, 27, 0.4);
+        }
+        .btn-outline-luxury {
+            border: 1px solid #991b1b;
+            color: #991b1b;
+            transition: all 0.3s;
+        }
+        .btn-outline-luxury:hover {
+            background: rgba(153, 27, 27, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #991b1b, #be185d);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Shimmer effect for badges */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fefaf5; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #991b1b, #be185d); border-radius: 4px; }
+        
+        /* Collection Badge */
+        .collection-badge {
+            background: rgba(153, 27, 27, 0.1);
+            border-left: 3px solid #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-5 px-6 bg-white/95 backdrop-blur-sm shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold font-['Playfair_Display']">
+                <span class="gradient-text">Velvet</span>
+            </div>
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link text-gray-700 hover:text-[#991b1b] transition">Home</a>
+                <a href="#new-arrivals" class="nav-link text-gray-700 hover:text-[#991b1b] transition">New Arrivals</a>
+                <a href="#collections" class="nav-link text-gray-700 hover:text-[#991b1b] transition">Collections</a>
+                <a href="#about" class="nav-link text-gray-700 hover:text-[#991b1b] transition">About</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-[#991b1b] transition">Contact</a>
+            </div>
+            <div class="flex gap-4">
+                <i class="fas fa-search text-gray-600 hover:text-[#991b1b] cursor-pointer text-xl transition"></i>
+                <i class="fas fa-shopping-bag text-gray-600 hover:text-[#991b1b] cursor-pointer text-xl transition relative">
+                    <span class="absolute -top-2 -right-2 bg-[#991b1b] text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                </i>
+                <i class="fas fa-user text-gray-600 hover:text-[#991b1b] cursor-pointer text-xl transition"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-rose-50 via-white to-amber-50"></div>
+        <div class="absolute top-20 right-20 w-96 h-96 bg-rose-100 rounded-full filter blur-[100px] opacity-40"></div>
+        <div class="absolute bottom-20 left-20 w-96 h-96 bg-amber-100 rounded-full filter blur-[100px] opacity-40"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#991b1b]/10 text-[#991b1b] text-sm font-semibold mb-6">
+                        <i class="fas fa-star"></i> Fall/Winter 2024
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.2] font-['Playfair_Display']">
+                        Elegance <span class="gradient-text">redefined</span><br>
+                        for the modern woman
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Discover our latest collection of timeless pieces, crafted with the finest materials and unparalleled attention to detail.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="px-8 py-4 btn-primary-luxury rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2 group">
+                            Shop Now <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        </button>
+                        <button class="px-8 py-4 btn-outline-luxury rounded-full font-semibold text-lg flex items-center justify-center gap-2">
+                            <i class="fas fa-play"></i> View Lookbook
+                        </button>
+                    </div>
+                    <div class="mt-8 flex items-center gap-6">
+                        <div><div class="text-2xl font-bold text-[#991b1b]">50+</div><div class="text-xs text-gray-500">New Arrivals</div></div>
+                        <div><div class="text-2xl font-bold text-[#991b1b]">30%</div><div class="text-xs text-gray-500">Seasonal Sale</div></div>
+                        <div><div class="text-2xl font-bold text-[#991b1b]">Free</div><div class="text-xs text-gray-500">Shipping on $150+</div></div>
+                    </div>
+                </div>
+                <div class="relative flex justify-center fade-right">
+                    <div class="relative">
+                        <div class="absolute -top-10 -left-10 w-40 h-40 bg-[#991b1b]/10 rounded-full"></div>
+                        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-[#be185d]/10 rounded-full"></div>
+                        <div class="relative bg-gradient-to-br from-rose-100 to-amber-100 rounded-3xl p-8">
+                            <i class="fas fa-tshirt text-9xl text-[#991b1b]"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-[#991b1b] text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="py-16 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center group cursor-pointer">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-rose-100 group-hover:bg-rose-200 transition flex items-center justify-center mb-3"><i class="fas fa-tshirt text-2xl text-[#991b1b]"></i></div>
+                    <span class="text-sm font-medium">Dresses</span>
+                </div>
+                <div class="text-center group cursor-pointer">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-rose-100 group-hover:bg-rose-200 transition flex items-center justify-center mb-3"><i class="fas fa-vest text-2xl text-[#991b1b]"></i></div>
+                    <span class="text-sm font-medium">Outerwear</span>
+                </div>
+                <div class="text-center group cursor-pointer">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-rose-100 group-hover:bg-rose-200 transition flex items-center justify-center mb-3"><i class="fas fa-shoe-prints text-2xl text-[#991b1b]"></i></div>
+                    <span class="text-sm font-medium">Footwear</span>
+                </div>
+                <div class="text-center group cursor-pointer">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-rose-100 group-hover:bg-rose-200 transition flex items-center justify-center mb-3"><i class="fas fa-gem text-2xl text-[#991b1b]"></i></div>
+                    <span class="text-sm font-medium">Accessories</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section id="new-arrivals" class="py-24 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-[#991b1b] font-semibold mb-3 tracking-wider">JUST ARRIVED</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5 font-['Playfair_Display']">New Collection</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Discover the latest trends for the season ahead</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="product-card">
+                    <div class="relative h-80 bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center">
+                        <i class="fas fa-tshirt text-6xl text-[#991b1b]"></i>
+                        <div class="absolute top-3 right-3 bg-[#991b1b] text-white text-xs px-2 py-1 rounded-full">New</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Silk Midi Dress</h3>
+                        <p class="text-gray-500 text-sm mb-2">Elegant silk dress with cowl neck</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-[#991b1b]">$289</span>
+                            <button class="text-sm border border-[#991b1b] px-3 py-1 rounded-full hover:bg-[#991b1b] hover:text-white transition">Quick View</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="relative h-80 bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center">
+                        <i class="fas fa-vest text-6xl text-[#991b1b]"></i>
+                        <div class="absolute top-3 right-3 bg-[#991b1b] text-white text-xs px-2 py-1 rounded-full">Best Seller</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Wool Cashmere Coat</h3>
+                        <p class="text-gray-500 text-sm mb-2">Classic camel coat, tailored fit</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-[#991b1b]">$459</span>
+                            <button class="text-sm border border-[#991b1b] px-3 py-1 rounded-full hover:bg-[#991b1b] hover:text-white transition">Quick View</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="relative h-80 bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center">
+                        <i class="fas fa-tshirt text-6xl text-[#991b1b]"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Satin Blouse</h3>
+                        <p class="text-gray-500 text-sm mb-2">Button-down with bow detail</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-[#991b1b]">$159</span>
+                            <button class="text-sm border border-[#991b1b] px-3 py-1 rounded-full hover:bg-[#991b1b] hover:text-white transition">Quick View</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="relative h-80 bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center">
+                        <i class="fas fa-shoe-prints text-6xl text-[#991b1b]"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Leather Ankle Boots</h3>
+                        <p class="text-gray-500 text-sm mb-2">Block heel, side zip closure</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-[#991b1b]">$249</span>
+                            <button class="text-sm border border-[#991b1b] px-3 py-1 rounded-full hover:bg-[#991b1b] hover:text-white transition">Quick View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="px-8 py-3 btn-outline-luxury rounded-full font-semibold">View All →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Banner -->
+    <section id="collections" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="relative rounded-3xl overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-gradient-to-r from-[#991b1b]/80 to-transparent z-10"></div>
+                    <div class="bg-[#991b1b] h-96 flex items-center justify-center relative z-0">
+                        <i class="fas fa-crown text-8xl text-white/20"></i>
+                    </div>
+                    <div class="absolute bottom-8 left-8 z-20">
+                        <h3 class="text-2xl font-bold text-white mb-2">Evening Collection</h3>
+                        <p class="text-white/80 text-sm mb-4">Shop the latest formal wear</p>
+                        <button class="bg-white text-[#991b1b] px-6 py-2 rounded-full font-semibold text-sm">Shop Now →</button>
+                    </div>
+                </div>
+                <div class="relative rounded-3xl overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-gradient-to-r from-[#be185d]/80 to-transparent z-10"></div>
+                    <div class="bg-[#be185d] h-96 flex items-center justify-center relative z-0">
+                        <i class="fas fa-leaf text-8xl text-white/20"></i>
+                    </div>
+                    <div class="absolute bottom-8 left-8 z-20">
+                        <h3 class="text-2xl font-bold text-white mb-2">Sustainable Edit</h3>
+                        <p class="text-white/80 text-sm mb-4">Eco-friendly conscious fashion</p>
+                        <button class="bg-white text-[#be185d] px-6 py-2 rounded-full font-semibold text-sm">Explore →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bestsellers -->
+    <section class="py-24 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-[#991b1b] font-semibold mb-3 tracking-wider">CUSTOMER FAVORITES</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5 font-['Playfair_Display']">Bestsellers</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Most loved pieces by our community</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="product-card">
+                    <div class="h-80 bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center"><i class="fas fa-tshirt text-7xl text-[#991b1b]"></i></div>
+                    <div class="p-5">
+                        <div class="flex text-[#991b1b] text-sm mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-gray-400 ml-2">(128)</span></div>
+                        <h3 class="font-bold text-lg">Cashmere Turtleneck</h3>
+                        <p class="text-gray-500 text-sm">Ultra-soft, ribbed cuffs</p>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-xl font-bold text-[#991b1b]">$189</span>
+                            <button class="btn-primary-luxury px-4 py-2 rounded-full text-sm">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="h-80 bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center"><i class="fas fa-vest text-7xl text-[#991b1b]"></i></div>
+                    <div class="p-5">
+                        <div class="flex text-[#991b1b] text-sm mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-gray-400 ml-2">(95)</span></div>
+                        <h3 class="font-bold text-lg">Wool Blazer</h3>
+                        <p class="text-gray-500 text-sm">Tailored fit, peak lapel</p>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-xl font-bold text-[#991b1b]">$329</span>
+                            <button class="btn-primary-luxury px-4 py-2 rounded-full text-sm">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="h-80 bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center"><i class="fas fa-gem text-7xl text-[#991b1b]"></i></div>
+                    <div class="p-5">
+                        <div class="flex text-[#991b1b] text-sm mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span class="text-gray-400 ml-2">(203)</span></div>
+                        <h3 class="font-bold text-lg">Pearl Drop Earrings</h3>
+                        <p class="text-gray-500 text-sm">14k gold, freshwater pearls</p>
+                        <div class="flex justify-between items-center mt-3">
+                            <span class="text-xl font-bold text-[#991b1b]">$89</span>
+                            <button class="btn-primary-luxury px-4 py-2 rounded-full text-sm">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 fade-left">
+                    <p class="text-[#991b1b] font-semibold mb-3 tracking-wider">OUR STORY</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 font-['Playfair_Display']">Timeless Elegance, Modern Spirit</h2>
+                    <p class="text-gray-600 leading-relaxed mb-4">Velvet was born from a passion for creating clothing that empowers women. Every piece is designed to make you feel confident, beautiful, and uniquely yourself.</p>
+                    <p class="text-gray-600 leading-relaxed mb-6">We believe in quality over quantity, using only the finest sustainable materials and ethical production practices. Our collections are timeless, transcending seasonal trends.</p>
+                    <div class="flex gap-6">
+                        <div><div class="text-2xl font-bold text-[#991b1b]">10+</div><div class="text-sm text-gray-500">Years of Excellence</div></div>
+                        <div><div class="text-2xl font-bold text-[#991b1b]">100%</div><div class="text-sm text-gray-500">Ethical Sourcing</div></div>
+                        <div><div class="text-2xl font-bold text-[#991b1b]">50K+</div><div class="text-sm text-gray-500">Happy Customers</div></div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 fade-right">
+                    <div class="bg-gradient-to-br from-rose-100 to-amber-100 rounded-3xl p-8 text-center">
+                        <i class="fas fa-quote-left text-3xl text-[#991b1b] mb-4 block"></i>
+                        <p class="text-gray-700 italic text-lg leading-relaxed mb-6">"Fashion is the armor to survive the reality of everyday life. We design for the woman who knows her worth."</p>
+                        <div class="flex items-center justify-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-[#991b1b] flex items-center justify-center"><i class="fas fa-user text-white"></i></div>
+                            <div><div class="font-bold">Isabella Rossi</div><div class="text-sm text-gray-500">Founder & Creative Director</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter & Contact -->
+    <section id="contact" class="py-24 px-6 bg-[#991b1b] text-white">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 font-['Playfair_Display']">Join the Velvet Circle</h2>
+            <p class="text-white/80 mb-8">Be the first to know about new arrivals, exclusive offers, and style inspiration</p>
+            <div class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input type="email" placeholder="Your email address" class="flex-1 px-6 py-3 rounded-full text-gray-800 focus:outline-none">
+                <button class="px-8 py-3 bg-white text-[#991b1b] rounded-full font-semibold hover:shadow-lg transition">Subscribe</button>
+            </div>
+            <p class="text-white/60 text-sm mt-6">By subscribing, you agree to our Privacy Policy</p>
+            <div class="flex justify-center gap-6 mt-8">
+                <i class="fab fa-instagram text-2xl hover:text-white/80 cursor-pointer transition"></i>
+                <i class="fab fa-facebook text-2xl hover:text-white/80 cursor-pointer transition"></i>
+                <i class="fab fa-pinterest text-2xl hover:text-white/80 cursor-pointer transition"></i>
+                <i class="fab fa-tiktok text-2xl hover:text-white/80 cursor-pointer transition"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-[#1e1b2e] text-white">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div><h3 class="font-bold text-lg mb-4">Velvet</h3><p class="text-gray-400 text-sm">Luxury fashion for the modern woman.</p></div>
+            <div><h3 class="font-bold text-lg mb-4">Shop</h3><ul class="space-y-2 text-gray-400 text-sm"><li>New Arrivals</li><li>Best Sellers</li><li>Sale</li><li>Collections</li></ul></div>
+            <div><h3 class="font-bold text-lg mb-4">Support</h3><ul class="space-y-2 text-gray-400 text-sm"><li>Size Guide</li><li>Shipping & Returns</li><li>FAQs</li><li>Contact Us</li></ul></div>
+            <div><h3 class="font-bold text-lg mb-4">Follow</h3><div class="flex gap-4"><i class="fab fa-instagram text-gray-400 hover:text-white cursor-pointer"></i><i class="fab fa-facebook text-gray-400 hover:text-white cursor-pointer"></i><i class="fab fa-pinterest text-gray-400 hover:text-white cursor-pointer"></i></div></div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">© 2024 Velvet. All rights reserved.</div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Newsletter
+        const subscribeBtn = document.querySelector('.bg-white.text-\\[\\#991b1b\\]');
+        if (subscribeBtn) {
+            subscribeBtn.addEventListener('click', () => alert('Thank you for subscribing!'));
+        }
+    </script>
+</body>
+</html>

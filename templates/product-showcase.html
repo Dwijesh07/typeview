@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina X1 | The Ultimate Smart Speaker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #0f172a; }
+        
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 102, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 102, 255, 0.6); }
+        }
+        
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-left { animation: fadeInLeft 0.6s ease-out forwards; opacity: 0; }
+        .fade-right { animation: fadeInRight 0.6s ease-out forwards; opacity: 0; }
+        .scale-in { animation: scaleIn 0.5s ease-out forwards; opacity: 0; }
+        .float { animation: float 6s ease-in-out infinite; }
+        .pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+        
+        /* Gradient Styles */
+        .gradient-primary {
+            background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);
+        }
+        .gradient-dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Card Styles */
+        .card-white {
+            background: white;
+            border-radius: 28px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+        .card-white:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 40px -12px rgba(0, 102, 255, 0.15);
+        }
+        
+        /* Feature Card */
+        .feature-card {
+            background: white;
+            border-radius: 24px;
+            transition: all 0.3s;
+            border: 1px solid #eef2ff;
+        }
+        .feature-card:hover {
+            border-color: #0066ff;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px -10px rgba(0, 102, 255, 0.1);
+        }
+        
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #0066ff, #00ccff);
+            transition: all 0.3s;
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px rgba(0, 102, 255, 0.4);
+        }
+        .btn-outline {
+            border: 1px solid #0066ff;
+            color: #0066ff;
+            transition: all 0.3s;
+        }
+        .btn-outline:hover {
+            background: rgba(0, 102, 255, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        /* Specs Grid */
+        .spec-item {
+            border-bottom: 1px solid #eef2ff;
+            transition: all 0.3s;
+        }
+        .spec-item:hover {
+            border-bottom-color: #0066ff;
+            padding-left: 8px;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #0066ff, #00ccff); border-radius: 4px; }
+        
+        /* 3D Effect */
+        .product-glow {
+            background: radial-gradient(circle at 30% 40%, rgba(0, 102, 255, 0.1), transparent 70%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-5 px-6 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold"><span class="gradient-text">Lumina</span> X1</div>
+            <div class="hidden md:flex gap-8">
+                <a href="#overview" class="text-gray-600 hover:text-[#0066ff] transition">Overview</a>
+                <a href="#features" class="text-gray-600 hover:text-[#0066ff] transition">Features</a>
+                <a href="#specs" class="text-gray-600 hover:text-[#0066ff] transition">Specs</a>
+                <a href="#reviews" class="text-gray-600 hover:text-[#0066ff] transition">Reviews</a>
+            </div>
+            <button class="px-6 py-2 btn-primary rounded-full text-white font-semibold">Buy Now →</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="overview" class="relative pt-32 pb-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-cyan-50"></div>
+        <div class="absolute top-20 right-20 w-96 h-96 bg-blue-200 rounded-full filter blur-[100px] opacity-30"></div>
+        <div class="absolute bottom-20 left-20 w-96 h-96 bg-cyan-200 rounded-full filter blur-[100px] opacity-30"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-600 text-sm font-semibold mb-6">
+                        <i class="fas fa-star"></i> Limited Edition
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.2]">
+                        The Future of<br>
+                        <span class="gradient-text">Sound</span> is Here
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Experience audio like never before with Lumina X1. 360° immersive sound, AI-powered voice control, and premium craftsmanship.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="px-8 py-4 btn-primary rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2 group">
+                            Pre-order Now <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        </button>
+                        <button class="px-8 py-4 btn-outline rounded-full font-semibold text-lg flex items-center justify-center gap-2">
+                            <i class="fas fa-play"></i> Watch Demo
+                        </button>
+                    </div>
+                    <div class="mt-8 flex items-center gap-4">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-xs text-blue-600 border-2 border-white"><i class="fas fa-star"></i></div>
+                            <div class="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center text-xs text-cyan-600 border-2 border-white"><i class="fas fa-star"></i></div>
+                            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-xs text-purple-600 border-2 border-white"><i class="fas fa-star"></i></div>
+                        </div>
+                        <span class="text-sm text-gray-500">4.9/5 from <span class="font-semibold text-blue-600">2,847+</span> reviews</span>
+                    </div>
+                </div>
+                <div class="relative flex justify-center fade-right">
+                    <div class="relative">
+                        <div class="absolute inset-0 product-glow rounded-full"></div>
+                        <div class="relative w-80 h-80 md:w-96 md:h-96 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-2xl float pulse-glow">
+                            <i class="fas fa-music text-7xl text-white"></i>
+                        </div>
+                        <div class="absolute -top-6 -right-6 bg-white rounded-2xl p-3 shadow-lg">
+                            <div class="flex items-center gap-2"><i class="fas fa-bluetooth text-blue-500"></i><span class="font-bold text-sm">Bluetooth 5.3</span></div>
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-3 shadow-lg">
+                            <div class="flex items-center gap-2"><i class="fas fa-battery-full text-green-500"></i><span class="font-bold text-sm">20h Battery</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="fade-up"><div class="text-4xl font-bold gradient-text">20+</div><div class="text-gray-500 mt-1">Hours Battery</div></div>
+                <div class="fade-up" style="animation-delay: 0.1s;"><div class="text-4xl font-bold gradient-text">360°</div><div class="text-gray-500 mt-1">Immersive Sound</div></div>
+                <div class="fade-up" style="animation-delay: 0.2s;"><div class="text-4xl font-bold gradient-text">5.3</div><div class="text-gray-500 mt-1">Bluetooth</div></div>
+                <div class="fade-up" style="animation-delay: 0.3s;"><div class="text-4xl font-bold gradient-text">2.5kg</div><div class="text-gray-500 mt-1">Premium Build</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-blue-600 font-semibold mb-3 tracking-wider">WHY LUMINA X1</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Engineered for Excellence</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Every detail crafted to deliver an unparalleled audio experience</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-waveform text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">360° Spatial Audio</h3>
+                    <p class="text-gray-500 leading-relaxed">Immersive sound that fills any room, with precise directionality and depth.</p>
+                </div>
+                
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-100 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-microphone-alt text-2xl text-cyan-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI Voice Control</h3>
+                    <p class="text-gray-500 leading-relaxed">Intelligent voice assistant that learns your preferences and adapts.</p>
+                </div>
+                
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-charging-station text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Fast Wireless Charging</h3>
+                    <p class="text-gray-500 leading-relaxed">10-minute charge gives 4 hours of playtime. Full charge in under 2 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Highlights -->
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 fade-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 rounded-full text-blue-600 text-sm font-semibold mb-4">
+                        <i class="fas fa-magic"></i> Premium Design
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Elegant. Minimal. Powerful.</h2>
+                    <p class="text-gray-600 leading-relaxed mb-6">Crafted from premium materials with a sleek, minimalist aesthetic that complements any space. Available in three stunning finishes to match your style.</p>
+                    <div class="flex gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gray-800 cursor-pointer hover:scale-110 transition"></div>
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-gray-200 cursor-pointer hover:scale-110 transition"></div>
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 cursor-pointer hover:scale-110 transition"></div>
+                    </div>
+                    <button class="px-6 py-2 btn-outline rounded-full font-semibold">Explore Colors →</button>
+                </div>
+                <div class="order-1 md:order-2 fade-right">
+                    <div class="bg-gradient-to-br from-gray-100 to-blue-50 rounded-3xl p-8 flex justify-center">
+                        <i class="fas fa-music text-8xl text-blue-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications -->
+    <section id="specs" class="py-24 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-blue-600 font-semibold mb-3 tracking-wider">TECHNICAL DETAILS</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Specifications</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Everything you need to know about Lumina X1</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card-white p-8">
+                    <h3 class="text-xl font-bold mb-6">Audio Performance</h3>
+                    <div class="space-y-4">
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Speaker Configuration</span><span class="font-semibold">2.1 Channel, 60W</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Frequency Response</span><span class="font-semibold">40Hz - 40kHz</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Impedance</span><span class="font-semibold">4 Ohms</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Sensitivity</span><span class="font-semibold">90 dB</span></div></div>
+                    </div>
+                </div>
+                <div class="card-white p-8">
+                    <h3 class="text-xl font-bold mb-6">Connectivity</h3>
+                    <div class="space-y-4">
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Bluetooth</span><span class="font-semibold">5.3 with aptX HD</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Wi-Fi</span><span class="font-semibold">802.11ac (2.4GHz/5GHz)</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Inputs</span><span class="font-semibold">AUX, USB-C, Optical</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Voice Assistant</span><span class="font-semibold">Alexa, Google Assistant</span></div></div>
+                    </div>
+                </div>
+                <div class="card-white p-8">
+                    <h3 class="text-xl font-bold mb-6">Power & Battery</h3>
+                    <div class="space-y-4">
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Battery Life</span><span class="font-semibold">Up to 20 hours</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Charging Time</span><span class="font-semibold">2 hours (full)</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Fast Charging</span><span class="font-semibold">10 min = 4 hours</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Power Supply</span><span class="font-semibold">USB-C PD 30W</span></div></div>
+                    </div>
+                </div>
+                <div class="card-white p-8">
+                    <h3 class="text-xl font-bold mb-6">Dimensions</h3>
+                    <div class="space-y-4">
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Size</span><span class="font-semibold">200mm x 200mm x 150mm</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Weight</span><span class="font-semibold">2.5 kg</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Materials</span><span class="font-semibold">Aluminum, Fabric, Glass</span></div></div>
+                        <div class="spec-item pb-3"><div class="flex justify-between"><span class="text-gray-500">Colors</span><span class="font-semibold">Black, White, Blue Gradient</span></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's In The Box -->
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 rounded-full text-blue-600 text-sm font-semibold mb-4">
+                        <i class="fas fa-box-open"></i> What's Included
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Unbox the Experience</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-600 text-xl"></i><span>Lumina X1 Smart Speaker</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-600 text-xl"></i><span>USB-C Charging Cable</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-600 text-xl"></i><span>Power Adapter (30W)</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-600 text-xl"></i><span>Quick Start Guide</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-600 text-xl"></i><span>1-Year Warranty Card</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-600 text-xl"></i><span>Premium Storage Pouch</span></li>
+                    </ul>
+                </div>
+                <div class="fade-right">
+                    <div class="bg-gradient-to-br from-gray-100 to-blue-50 rounded-3xl p-8 flex justify-center">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white rounded-xl p-4 text-center"><i class="fas fa-charging-station text-2xl text-blue-600 mb-2 block"></i><span class="text-sm">USB-C Cable</span></div>
+                            <div class="bg-white rounded-xl p-4 text-center"><i class="fas fa-book text-2xl text-blue-600 mb-2 block"></i><span class="text-sm">Guide</span></div>
+                            <div class="bg-white rounded-xl p-4 text-center"><i class="fas fa-shield-alt text-2xl text-blue-600 mb-2 block"></i><span class="text-sm">Warranty</span></div>
+                            <div class="bg-white rounded-xl p-4 text-center"><i class="fas fa-bag-shopping text-2xl text-blue-600 mb-2 block"></i><span class="text-sm">Pouch</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-24 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-blue-600 font-semibold mb-3 tracking-wider">CUSTOMER LOVE</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">What People Are Saying</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Join thousands of satisfied customers worldwide</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-white p-8">
+                    <div class="flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"The sound quality is absolutely incredible. I've never experienced such rich, immersive audio from a single speaker. Worth every penny!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center"><i class="fas fa-user text-blue-600"></i></div>
+                        <div><div class="font-semibold">David Miller</div><div class="text-xs text-gray-400">Verified Buyer</div></div>
+                    </div>
+                </div>
+                <div class="card-white p-8">
+                    <div class="flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"Beautiful design, easy setup, and the voice assistant is incredibly responsive. Perfect for my home office and living room."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center"><i class="fas fa-user text-cyan-600"></i></div>
+                        <div><div class="font-semibold">Sarah Chen</div><div class="text-xs text-gray-400">Tech Enthusiast</div></div>
+                    </div>
+                </div>
+                <div class="card-white p-8">
+                    <div class="flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"Battery life is impressive, and the sound fills my entire apartment. The best smart speaker I've owned."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center"><i class="fas fa-user text-purple-600"></i></div>
+                        <div><div class="font-semibold">Michael Rodriguez</div><div class="text-xs text-gray-400">Music Producer</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing & CTA -->
+    <section class="py-24 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="card-white p-8 md:p-12">
+                <div class="inline-block px-4 py-2 rounded-full bg-blue-100 text-blue-600 font-semibold text-sm mb-6">Limited Time Offer</div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Experience the Future of Sound</h2>
+                <div class="text-5xl font-bold gradient-text mb-4">$299</div>
+                <p class="text-gray-500 mb-6">or 3 interest-free payments of $99.67</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="px-8 py-4 btn-primary rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2">
+                        Pre-order Now <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="px-8 py-4 btn-outline rounded-full font-semibold text-lg">Learn More</button>
+                </div>
+                <p class="text-xs text-gray-400 mt-6">Free shipping • 30-day returns • 1-year warranty</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-2xl font-bold gradient-text">Lumina X1</div>
+            <div class="flex gap-8">
+                <i class="fab fa-twitter text-gray-400 hover:text-white cursor-pointer transition"></i>
+                <i class="fab fa-instagram text-gray-400 hover:text-white cursor-pointer transition"></i>
+                <i class="fab fa-facebook text-gray-400 hover:text-white cursor-pointer transition"></i>
+                <i class="fab fa-youtube text-gray-400 hover:text-white cursor-pointer transition"></i>
+            </div>
+            <div class="text-gray-400 text-sm">© 2024 Lumina. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Pre-order button alert
+        const preorderBtn = document.querySelector('.btn-primary');
+        if (preorderBtn) {
+            preorderBtn.addEventListener('click', () => {
+                alert('Thank you for your interest! Pre-order will be available soon.');
+            });
+        }
+    </script>
+</body>
+</html>

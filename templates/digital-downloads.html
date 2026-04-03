@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreativeMarket | Premium Digital Assets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f5f3ff 0%, #ecfdf5 100%); color: #1e1b4b; }
+        
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-left { animation: fadeInLeft 0.6s ease-out forwards; opacity: 0; }
+        .fade-right { animation: fadeInRight 0.6s ease-out forwards; opacity: 0; }
+        .scale-in { animation: scaleIn 0.5s ease-out forwards; opacity: 0; }
+        .float { animation: float 5s ease-in-out infinite; }
+        
+        /* Gradient Styles */
+        .gradient-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #10b981 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #8b5cf6 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg-soft {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ecfdf5 100%);
+        }
+        
+        /* Card Styles */
+        .product-card {
+            background: white;
+            border-radius: 28px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 40px -12px rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        
+        /* Category Card */
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            transition: all 0.3s;
+            border: 1px solid #eef2ff;
+        }
+        .category-card:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px -10px rgba(139, 92, 246, 0.15);
+        }
+        
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #10b981);
+            transition: all 0.3s;
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
+        }
+        .btn-outline {
+            border: 1px solid #8b5cf6;
+            color: #8b5cf6;
+            transition: all 0.3s;
+        }
+        .btn-outline:hover {
+            background: rgba(139, 92, 246, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        /* Badge */
+        .badge-hot {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+        }
+        .badge-new {
+            background: linear-gradient(135deg, #10b981, #34d399);
+        }
+        
+        /* Testimonial Card */
+        .testimonial-card {
+            background: white;
+            border-radius: 24px;
+            transition: all 0.3s;
+            border: 1px solid #eef2ff;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5f3ff; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #8b5cf6, #10b981); border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-5 px-6 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold"><span class="gradient-text">CreativeMarket</span></div>
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="text-gray-600 hover:text-[#8b5cf6] transition">Home</a>
+                <a href="#assets" class="text-gray-600 hover:text-[#8b5cf6] transition">Assets</a>
+                <a href="#categories" class="text-gray-600 hover:text-[#8b5cf6] transition">Categories</a>
+                <a href="#pricing" class="text-gray-600 hover:text-[#8b5cf6] transition">Pricing</a>
+                <a href="#creators" class="text-gray-600 hover:text-[#8b5cf6] transition">For Creators</a>
+            </div>
+            <div class="flex gap-4">
+                <i class="fas fa-search text-gray-600 hover:text-[#8b5cf6] cursor-pointer text-xl transition"></i>
+                <i class="fas fa-shopping-cart text-gray-600 hover:text-[#8b5cf6] cursor-pointer text-xl transition"></i>
+                <button class="px-5 py-2 btn-primary rounded-full text-white font-semibold text-sm">Sign In</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 overflow-hidden">
+        <div class="absolute inset-0 gradient-bg-soft"></div>
+        <div class="absolute top-20 left-10 w-96 h-96 bg-purple-200 rounded-full filter blur-[100px] opacity-30"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-green-200 rounded-full filter blur-[100px] opacity-30"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 text-purple-600 text-sm font-semibold mb-6">
+                        <i class="fas fa-download"></i> 50,000+ Assets Available
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.2]">
+                        Premium Digital<br>
+                        <span class="gradient-text">Assets for Creators</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Discover thousands of high-quality fonts, templates, graphics, and icons. Created by top designers, ready for your next project.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="px-8 py-4 btn-primary rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2 group">
+                            Browse Assets <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        </button>
+                        <button class="px-8 py-4 btn-outline rounded-full font-semibold text-lg flex items-center justify-center gap-2">
+                            <i class="fas fa-play"></i> See How It Works
+                        </button>
+                    </div>
+                    <div class="mt-8 flex items-center gap-4">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-xs text-purple-600 border-2 border-white"><i class="fas fa-user"></i></div>
+                            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-xs text-green-600 border-2 border-white"><i class="fas fa-user"></i></div>
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-xs text-blue-600 border-2 border-white"><i class="fas fa-user"></i></div>
+                        </div>
+                        <span class="text-sm text-gray-500">Trusted by <span class="font-semibold text-purple-600">50,000+</span> creators worldwide</span>
+                    </div>
+                </div>
+                <div class="relative flex justify-center fade-right">
+                    <div class="relative">
+                        <div class="absolute -top-10 -left-10 w-40 h-40 bg-purple-200 rounded-full opacity-50"></div>
+                        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-green-200 rounded-full opacity-50"></div>
+                        <div class="relative bg-white rounded-3xl shadow-2xl p-8 float">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="text-center"><i class="fas fa-font text-4xl text-purple-600"></i><p class="text-sm mt-2">Fonts</p></div>
+                                <div class="text-center"><i class="fas fa-file-alt text-4xl text-green-600"></i><p class="text-sm mt-2">Templates</p></div>
+                                <div class="text-center"><i class="fas fa-palette text-4xl text-purple-600"></i><p class="text-sm mt-2">Graphics</p></div>
+                                <div class="text-center"><i class="fas fa-icons text-4xl text-green-600"></i><p class="text-sm mt-2">Icons</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Assets -->
+    <section id="assets" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-purple-600 font-semibold mb-3 tracking-wider">POPULAR THIS WEEK</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Trending Assets</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Most downloaded assets by our community</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="product-card p-5">
+                    <div class="relative h-48 bg-gradient-to-br from-purple-100 to-green-100 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fas fa-font text-5xl text-purple-600"></i>
+                        <div class="absolute top-2 right-2 badge-hot text-white text-xs px-2 py-1 rounded-full">Hot</div>
+                    </div>
+                    <h3 class="font-bold text-lg">Sans Serif Bundle</h3>
+                    <p class="text-gray-500 text-sm mb-2">20+ modern fonts</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold text-purple-600">$49</span>
+                        <button class="text-sm btn-primary px-4 py-2 rounded-full text-white">Buy Now</button>
+                    </div>
+                </div>
+                <div class="product-card p-5">
+                    <div class="h-48 bg-gradient-to-br from-purple-100 to-green-100 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fas fa-file-powerpoint text-5xl text-purple-600"></i>
+                    </div>
+                    <h3 class="font-bold text-lg">Presentation Pack</h3>
+                    <p class="text-gray-500 text-sm mb-2">50+ slides templates</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold text-purple-600">$39</span>
+                        <button class="text-sm btn-primary px-4 py-2 rounded-full text-white">Buy Now</button>
+                    </div>
+                </div>
+                <div class="product-card p-5">
+                    <div class="relative h-48 bg-gradient-to-br from-purple-100 to-green-100 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fas fa-palette text-5xl text-purple-600"></i>
+                        <div class="absolute top-2 right-2 badge-new text-white text-xs px-2 py-1 rounded-full">New</div>
+                    </div>
+                    <h3 class="font-bold text-lg">Illustration Set</h3>
+                    <p class="text-gray-500 text-sm mb-2">100+ vector illustrations</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold text-purple-600">$79</span>
+                        <button class="text-sm btn-primary px-4 py-2 rounded-full text-white">Buy Now</button>
+                    </div>
+                </div>
+                <div class="product-card p-5">
+                    <div class="h-48 bg-gradient-to-br from-purple-100 to-green-100 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fas fa-icons text-5xl text-purple-600"></i>
+                    </div>
+                    <h3 class="font-bold text-lg">Icon Library</h3>
+                    <p class="text-gray-500 text-sm mb-2">2000+ premium icons</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold text-purple-600">$29</span>
+                        <button class="text-sm btn-primary px-4 py-2 rounded-full text-white">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-purple-600 font-semibold mb-3 tracking-wider">EXPLORE BY CATEGORY</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Find What You Need</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Browse thousands of assets organized by category</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="category-card p-6 text-center cursor-pointer">
+                    <i class="fas fa-font text-4xl text-purple-600 mb-3 block"></i>
+                    <h3 class="font-bold text-lg">Fonts</h3>
+                    <p class="text-gray-500 text-sm">2,500+ font families</p>
+                </div>
+                <div class="category-card p-6 text-center cursor-pointer">
+                    <i class="fas fa-file-alt text-4xl text-green-600 mb-3 block"></i>
+                    <h3 class="font-bold text-lg">Templates</h3>
+                    <p class="text-gray-500 text-sm">1,200+ templates</p>
+                </div>
+                <div class="category-card p-6 text-center cursor-pointer">
+                    <i class="fas fa-palette text-4xl text-purple-600 mb-3 block"></i>
+                    <h3 class="font-bold text-lg">Graphics</h3>
+                    <p class="text-gray-500 text-sm">5,000+ graphics</p>
+                </div>
+                <div class="category-card p-6 text-center cursor-pointer">
+                    <i class="fas fa-icons text-4xl text-green-600 mb-3 block"></i>
+                    <h3 class="font-bold text-lg">Icons</h3>
+                    <p class="text-gray-500 text-sm">10,000+ icons</p>
+                </div>
+                <div class="category-card p-6 text-center cursor-pointer">
+                    <i class="fas fa-video text-4xl text-purple-600 mb-3 block"></i>
+                    <h3 class="font-bold text-lg">Stock Video</h3>
+                    <p class="text-gray-500 text-sm">3,000+ clips</p>
+                </div>
+                <div class="category-card p-6 text-center cursor-pointer">
+                    <i class="fas fa-music text-4xl text-green-600 mb-3 block"></i>
+                    <h3 class="font-bold text-lg">Music & SFX</h3>
+                    <p class="text-gray-500 text-sm">1,500+ tracks</p>
+                </div>
+                <div class="category-card p-6 text-center cursor-pointer">
+                    <i class="fas fa-cube text-4xl text-purple-600 mb-3 block"></i>
+                    <h3 class="font-bold text-lg">3D Assets</h3>
+                    <p class="text-gray-500 text-sm">800+ models</p>
+                </div>
+                <div class="category-card p-6 text-center cursor-pointer">
+                    <i class="fas fa-code text-4xl text-green-600 mb-3 block"></i>
+                    <h3 class="font-bold text-lg">Web Templates</h3>
+                    <p class="text-gray-500 text-sm">600+ templates</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section id="pricing" class="py-24 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-purple-600 font-semibold mb-3 tracking-wider">PRICING</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Simple, Flexible Plans</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Choose the plan that works for your creative needs</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                <div class="bg-white rounded-2xl p-6 text-center border border-gray-100 hover:shadow-xl transition">
+                    <h3 class="font-bold text-lg">Free</h3>
+                    <div class="text-3xl font-bold mt-3 mb-4">$0</div>
+                    <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <li>5 free downloads/month</li>
+                        <li>Basic assets only</li>
+                        <li>Community support</li>
+                    </ul>
+                    <button class="w-full py-2 border border-purple-600 rounded-full text-purple-600 hover:bg-purple-600 hover:text-white transition">Get Started</button>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center border-2 border-purple-600 shadow-lg relative">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white text-xs px-3 py-1 rounded-full">POPULAR</div>
+                    <h3 class="font-bold text-lg">Pro</h3>
+                    <div class="text-3xl font-bold mt-3 mb-4">$19<span class="text-sm text-gray-500">/mo</span></div>
+                    <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <li>Unlimited downloads</li>
+                        <li>All premium assets</li>
+                        <li>Commercial license</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="w-full py-2 btn-primary rounded-full text-white">Start Free Trial</button>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center border border-gray-100 hover:shadow-xl transition">
+                    <h3 class="font-bold text-lg">Team</h3>
+                    <div class="text-3xl font-bold mt-3 mb-4">$49<span class="text-sm text-gray-500">/mo</span></div>
+                    <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <li>Up to 5 users</li>
+                        <li>Team management</li>
+                        <li>Advanced analytics</li>
+                        <li>API access</li>
+                    </ul>
+                    <button class="w-full py-2 border border-purple-600 rounded-full text-purple-600 hover:bg-purple-600 hover:text-white transition">Contact Sales</button>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center border border-gray-100 hover:shadow-xl transition">
+                    <h3 class="font-bold text-lg">Enterprise</h3>
+                    <div class="text-3xl font-bold mt-3 mb-4">Custom</div>
+                    <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <li>Unlimited users</li>
+                        <li>Custom licensing</li>
+                        <li>Dedicated support</li>
+                        <li>SLA guarantee</li>
+                    </ul>
+                    <button class="w-full py-2 border border-purple-600 rounded-full text-purple-600 hover:bg-purple-600 hover:text-white transition">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Creators Section -->
+    <section id="creators" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-semibold mb-4">
+                        <i class="fas fa-store"></i> Sell Your Work
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Become a Creator</h2>
+                    <p class="text-gray-600 leading-relaxed mb-6">Share your talent with the world. Upload your fonts, templates, graphics, and start earning passive income. Join thousands of creators who make a living doing what they love.</p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-600"></i><span>Keep 70% of every sale</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-600"></i><span>Global audience of 50,000+ customers</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-600"></i><span>Monthly payouts, no hidden fees</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-600"></i><span>Dedicated creator support</span></li>
+                    </ul>
+                    <button class="px-8 py-3 btn-primary rounded-full text-white font-semibold">Apply as Creator →</button>
+                </div>
+                <div class="fade-right">
+                    <div class="bg-gradient-to-br from-purple-100 to-green-100 rounded-3xl p-8 text-center">
+                        <div class="text-4xl font-bold gradient-text mb-2">$2.5M+</div>
+                        <p class="text-gray-600">paid to creators in 2024</p>
+                        <div class="mt-6 flex justify-center gap-6">
+                            <div><div class="text-xl font-bold text-purple-600">3,000+</div><div class="text-xs text-gray-500">Active Creators</div></div>
+                            <div><div class="text-xl font-bold text-green-600">50K+</div><div class="text-xs text-gray-500">Assets Sold</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-purple-600 font-semibold mb-3 tracking-wider">TESTIMONIALS</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">What Creators Say</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Trusted by designers and developers worldwide</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card p-6">
+                    <div class="flex text-purple-600 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"CreativeMarket has been a game-changer for my design business. The quality of assets is unmatched and the platform is a breeze to use."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center"><i class="fas fa-user text-purple-600"></i></div>
+                        <div><div class="font-semibold">Sarah Johnson</div><div class="text-xs text-gray-500">Graphic Designer</div></div>
+                    </div>
+                </div>
+                <div class="testimonial-card p-6">
+                    <div class="flex text-purple-600 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"The font selection is incredible. I've found exactly what I need for every project. The subscription pays for itself ten times over."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center"><i class="fas fa-user text-green-600"></i></div>
+                        <div><div class="font-semibold">Michael Chen</div><div class="text-xs text-gray-500">Brand Designer</div></div>
+                    </div>
+                </div>
+                <div class="testimonial-card p-6">
+                    <div class="flex text-purple-600 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">"As a creator, selling my fonts on CreativeMarket has been life-changing. The platform is intuitive and the community is amazing."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center"><i class="fas fa-user text-purple-600"></i></div>
+                        <div><div class="font-semibold">Emma Rodriguez</div><div class="text-xs text-gray-500">Font Designer</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-20 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="gradient-primary rounded-3xl p-12 text-white">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Get 10% Off Your First Order</h2>
+                <p class="text-white/80 mb-8">Subscribe to our newsletter and receive exclusive offers, new asset alerts, and design inspiration.</p>
+                <div class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                    <input type="email" placeholder="Your email address" class="flex-1 px-6 py-3 rounded-full text-gray-800 focus:outline-none">
+                    <button class="px-8 py-3 bg-white text-purple-600 rounded-full font-semibold hover:shadow-lg transition">Subscribe</button>
+                </div>
+                <p class="text-white/60 text-sm mt-6">No spam. Unsubscribe anytime.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div><h3 class="font-bold text-lg mb-4">CreativeMarket</h3><p class="text-gray-400 text-sm">Premium digital assets for creators</p></div>
+            <div><h3 class="font-bold text-lg mb-4">Assets</h3><ul class="space-y-2 text-gray-400 text-sm"><li>Fonts</li><li>Templates</li><li>Graphics</li><li>Icons</li></ul></div>
+            <div><h3 class="font-bold text-lg mb-4">Support</h3><ul class="space-y-2 text-gray-400 text-sm"><li>Help Center</li><li>Licensing</li><li>Refund Policy</li><li>Contact Us</li></ul></div>
+            <div><h3 class="font-bold text-lg mb-4">Connect</h3><div class="flex gap-4"><i class="fab fa-twitter text-gray-400 hover:text-white cursor-pointer"></i><i class="fab fa-instagram text-gray-400 hover:text-white cursor-pointer"></i><i class="fab fa-discord text-gray-400 hover:text-white cursor-pointer"></i><i class="fab fa-github text-gray-400 hover:text-white cursor-pointer"></i></div></div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">© 2024 CreativeMarket. All rights reserved.</div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Newsletter
+        const subscribeBtn = document.querySelector('.bg-white.text-purple-600');
+        if (subscribeBtn) {
+            subscribeBtn.addEventListener('click', () => alert('Thank you for subscribing! Check your inbox for 10% off.'));
+        }
+    </script>
+</body>
+</html>

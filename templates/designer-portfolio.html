@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sophia Lin | Design Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #ffffff; color: #111111; }
+        
+        /* Custom Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-scale { animation: fadeInScale 0.6s ease-out forwards; opacity: 0; }
+        .slide-left { animation: slideInLeft 0.6s ease-out forwards; opacity: 0; }
+        .slide-right { animation: slideInRight 0.6s ease-out forwards; opacity: 0; }
+        
+        /* Typography */
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        
+        /* Project Card */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            padding: 2rem;
+            text-align: center;
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #111111;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Button */
+        .btn-outline-dark {
+            border: 1px solid #111111;
+            background: transparent;
+            transition: all 0.3s;
+        }
+        .btn-outline-dark:hover {
+            background: #111111;
+            color: white;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f0f0f0; }
+        ::-webkit-scrollbar-thumb { background: #111111; border-radius: 3px; }
+        
+        /* Divider */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: #111111;
+            margin: 0 auto;
+        }
+        .divider-light {
+            width: 40px;
+            height: 1px;
+            background: #e5e5e5;
+            margin: 0 auto;
+        }
+        
+        /* Service Card */
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        /* Testimonial Card */
+        .testimonial-card {
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        .testimonial-card:hover {
+            border-color: #e0e0e0;
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-6 px-6 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-xl font-serif font-light tracking-wide">Sophia Lin</div>
+            <div class="hidden md:flex gap-10">
+                <a href="#home" class="nav-link text-gray-800 text-sm uppercase tracking-wider">Work</a>
+                <a href="#projects" class="nav-link text-gray-800 text-sm uppercase tracking-wider">Projects</a>
+                <a href="#about" class="nav-link text-gray-800 text-sm uppercase tracking-wider">About</a>
+                <a href="#services" class="nav-link text-gray-800 text-sm uppercase tracking-wider">Services</a>
+                <a href="#contact" class="nav-link text-gray-800 text-sm uppercase tracking-wider">Contact</a>
+            </div>
+            <button class="hidden md:block text-sm uppercase tracking-wider border-b border-gray-800 pb-1">Selected Work</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20">
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            <div class="mb-8 fade-up">
+                <span class="text-xs uppercase tracking-[0.3em] text-gray-400">Design Studio</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-light mb-6 leading-[1.1] fade-up" style="animation-delay: 0.1s;">
+                Design with<br>
+                <span class="italic">soul.</span>
+            </h1>
+            <div class="divider mb-8 fade-up" style="animation-delay: 0.2s;"></div>
+            <p class="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed fade-up" style="animation-delay: 0.3s;">
+                Creating meaningful experiences through thoughtful design. Based in New York, working globally.
+            </p>
+            <div class="mt-10 fade-up" style="animation-delay: 0.4s;">
+                <button class="px-8 py-3 btn-outline-dark rounded-none text-sm uppercase tracking-wider">View Portfolio</button>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-gray-300 text-xl"></i>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section id="projects" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gray-400">Selected Work</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-light mt-4 mb-4">Featured Projects</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="project-card aspect-[4/3] bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        <i class="fas fa-palette text-5xl text-gray-300"></i>
+                    </div>
+                    <div class="project-overlay">
+                        <p class="text-white text-xs uppercase tracking-wider mb-2">Brand Identity</p>
+                        <h3 class="text-white text-xl font-serif mb-3">Nexus Agency</h3>
+                        <p class="text-gray-300 text-sm mb-4">Complete rebranding for a digital agency</p>
+                        <span class="text-white text-xs border-b border-white pb-1">View Case Study →</span>
+                    </div>
+                </div>
+                <div class="project-card aspect-[4/3] bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-5xl text-gray-300"></i>
+                    </div>
+                    <div class="project-overlay">
+                        <p class="text-white text-xs uppercase tracking-wider mb-2">Digital Product</p>
+                        <h3 class="text-white text-xl font-serif mb-3">Flow Fitness App</h3>
+                        <p class="text-gray-300 text-sm mb-4">UI/UX design for a fitness platform</p>
+                        <span class="text-white text-xs border-b border-white pb-1">View Case Study →</span>
+                    </div>
+                </div>
+                <div class="project-card aspect-[4/3] bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        <i class="fas fa-globe text-5xl text-gray-300"></i>
+                    </div>
+                    <div class="project-overlay">
+                        <p class="text-white text-xs uppercase tracking-wider mb-2">Web Design</p>
+                        <h3 class="text-white text-xl font-serif mb-3">Studio M Website</h3>
+                        <p class="text-gray-300 text-sm mb-4">Minimalist portfolio for architecture firm</p>
+                        <span class="text-white text-xs border-b border-white pb-1">View Case Study →</span>
+                    </div>
+                </div>
+                <div class="project-card aspect-[4/3] bg-gray-100">
+                    <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        <i class="fas fa-box-open text-5xl text-gray-300"></i>
+                    </div>
+                    <div class="project-overlay">
+                        <p class="text-white text-xs uppercase tracking-wider mb-2">Packaging</p>
+                        <h3 class="text-white text-xl font-serif mb-3">Luna Cosmetics</h3>
+                        <p class="text-gray-300 text-sm mb-4">Luxury packaging design</p>
+                        <span class="text-white text-xs border-b border-white pb-1">View Case Study →</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="px-8 py-3 text-sm uppercase tracking-wider border-b border-gray-800 pb-2">View All Projects →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 bg-[#fafafa]">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1 slide-left">
+                    <div class="w-full aspect-[3/4] bg-gray-200 flex items-center justify-center">
+                        <i class="fas fa-user-circle text-8xl text-gray-300"></i>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 slide-right">
+                    <span class="text-xs uppercase tracking-[0.3em] text-gray-400">About</span>
+                    <h2 class="text-3xl md:text-4xl font-serif font-light mt-4 mb-6">Sophia Lin</h2>
+                    <div class="w-12 h-px bg-gray-400 mb-6"></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">Sophia Lin is a multidisciplinary designer specializing in brand identity, digital products, and creative direction. Her work bridges the gap between minimalism and emotion, creating designs that resonate deeply with audiences.</p>
+                    <p class="text-gray-600 leading-relaxed mb-6">With over 8 years of experience collaborating with startups, agencies, and global brands, Sophia brings a unique perspective to every project — one that prioritizes authenticity, clarity, and human connection.</p>
+                    <div class="flex gap-6">
+                        <div><div class="text-2xl font-serif font-light">8+</div><div class="text-xs text-gray-500 uppercase tracking-wider">Years Experience</div></div>
+                        <div><div class="text-2xl font-serif font-light">50+</div><div class="text-xs text-gray-500 uppercase tracking-wider">Projects</div></div>
+                        <div><div class="text-2xl font-serif font-light">12+</div><div class="text-xs text-gray-500 uppercase tracking-wider">Awards</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gray-400">What I Do</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-light mt-4 mb-4">Services</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="service-card text-center p-6">
+                    <i class="fas fa-paintbrush-fine text-3xl text-gray-400 mb-4 block"></i>
+                    <h3 class="font-serif text-xl font-medium mb-3">Brand Identity</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Logo design, visual identity systems, brand guidelines, and brand strategy that tells your story.</p>
+                </div>
+                <div class="service-card text-center p-6">
+                    <i class="fas fa-mobile-alt text-3xl text-gray-400 mb-4 block"></i>
+                    <h3 class="font-serif text-xl font-medium mb-3">UI/UX Design</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">User-centered design for web and mobile apps, from wireframes to high-fidelity prototypes.</p>
+                </div>
+                <div class="service-card text-center p-6">
+                    <i class="fas fa-globe text-3xl text-gray-400 mb-4 block"></i>
+                    <h3 class="font-serif text-xl font-medium mb-3">Web Design</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Responsive websites, landing pages, and digital experiences that captivate and convert.</p>
+                </div>
+                <div class="service-card text-center p-6">
+                    <i class="fas fa-box-open text-3xl text-gray-400 mb-4 block"></i>
+                    <h3 class="font-serif text-xl font-medium mb-3">Packaging Design</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Luxury packaging, product boxes, and sustainable packaging solutions.</p>
+                </div>
+                <div class="service-card text-center p-6">
+                    <i class="fas fa-chart-line text-3xl text-gray-400 mb-4 block"></i>
+                    <h3 class="font-serif text-xl font-medium mb-3">Creative Direction</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Art direction, campaign strategy, and visual storytelling for brands.</p>
+                </div>
+                <div class="service-card text-center p-6">
+                    <i class="fas fa-code text-3xl text-gray-400 mb-4 block"></i>
+                    <h3 class="font-serif text-xl font-medium mb-3">Frontend Dev</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">HTML/CSS, Tailwind, and interactive web experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards & Recognition -->
+    <section class="py-24 px-6 bg-[#fafafa]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gray-400">Recognition</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-light mt-4 mb-4">Awards & Features</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="text-center p-6">
+                    <i class="fas fa-trophy text-2xl text-gray-400 mb-3 block"></i>
+                    <p class="text-sm font-medium">AIGA Award</p>
+                    <p class="text-xs text-gray-400">2024</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-star text-2xl text-gray-400 mb-3 block"></i>
+                    <p class="text-sm font-medium">Communication Arts</p>
+                    <p class="text-xs text-gray-400">2023</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-newspaper text-2xl text-gray-400 mb-3 block"></i>
+                    <p class="text-sm font-medium">Featured in It's Nice That</p>
+                    <p class="text-xs text-gray-400">2023</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-award text-2xl text-gray-400 mb-3 block"></i>
+                    <p class="text-sm font-medium">Webby Award Nominee</p>
+                    <p class="text-xs text-gray-400">2022</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gray-400">Kind Words</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-light mt-4 mb-4">Testimonials</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card p-8">
+                    <i class="fas fa-quote-left text-gray-200 text-2xl mb-4 block"></i>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">"Sophia has an incredible eye for detail and a deep understanding of brand storytelling. She transformed our visual identity and elevated our entire brand presence."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center"><i class="fas fa-user text-gray-400 text-sm"></i></div>
+                        <div><div class="text-sm font-medium">Sarah Johnson</div><div class="text-xs text-gray-400">Founder, Luna Cosmetics</div></div>
+                    </div>
+                </div>
+                <div class="testimonial-card p-8">
+                    <i class="fas fa-quote-left text-gray-200 text-2xl mb-4 block"></i>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">"Working with Sophia was a dream. She understood our vision immediately and brought it to life in ways we couldn't have imagined. The final designs exceeded all expectations."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center"><i class="fas fa-user text-gray-400 text-sm"></i></div>
+                        <div><div class="text-sm font-medium">Michael Chen</div><div class="text-xs text-gray-400">CEO, Nexus Agency</div></div>
+                    </div>
+                </div>
+                <div class="testimonial-card p-8">
+                    <i class="fas fa-quote-left text-gray-200 text-2xl mb-4 block"></i>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">"Sophia's design sensibility is unmatched. She brings a level of sophistication and thoughtfulness to every project. Highly recommended."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center"><i class="fas fa-user text-gray-400 text-sm"></i></div>
+                        <div><div class="text-sm font-medium">Emma Rodriguez</div><div class="text-xs text-gray-400">Creative Director, Studio M</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 bg-[#fafafa]">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="text-xs uppercase tracking-[0.3em] text-gray-400">Let's Connect</span>
+            <h2 class="text-3xl md:text-4xl font-serif font-light mt-4 mb-4">Collaborate</h2>
+            <div class="divider mx-auto mb-8"></div>
+            <p class="text-gray-600 mb-8">Have a project in mind? I'd love to hear about it.</p>
+            <a href="mailto:sophia@lin.design" class="text-lg font-serif border-b border-gray-800 pb-1 hover:border-gray-400 transition">sophia@lin.design</a>
+            <div class="flex justify-center gap-8 mt-10">
+                <i class="fab fa-instagram text-gray-400 hover:text-gray-800 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-behance text-gray-400 hover:text-gray-800 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-linkedin-in text-gray-400 hover:text-gray-800 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-pinterest text-gray-400 hover:text-gray-800 cursor-pointer transition text-xl"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-xs uppercase tracking-wider text-gray-400">© 2024 Sophia Lin Design Studio</p>
+            <p class="text-xs text-gray-400 mt-2">Design with intention.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        
+        // Fade in on scroll
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.project-card, .service-card, .testimonial-card').forEach(el => {
+            el.style.opacity = "0";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

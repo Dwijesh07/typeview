@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Zhang | Senior Full-Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f0f2f5; color: #1e293b; }
+        
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .fade-up { animation: fadeInUp 0.6s ease-out forwards; opacity: 0; }
+        .fade-left { animation: fadeInLeft 0.6s ease-out forwards; opacity: 0; }
+        .fade-right { animation: fadeInRight 0.6s ease-out forwards; opacity: 0; }
+        .scale-in { animation: scaleIn 0.5s ease-out forwards; opacity: 0; }
+        
+        /* Gradient Styles */
+        .gradient-primary {
+            background: linear-gradient(135deg, #1e293b 0%, #2d3a4a 100%);
+        }
+        .gradient-accent {
+            background: linear-gradient(135deg, #d4af37 0%, #fbbf24 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #d4af37 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Card Styles */
+        .card-white {
+            background: white;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .card-white:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Timeline Styles */
+        .timeline-dot {
+            position: relative;
+        }
+        .timeline-dot::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, #d4af37, #fbbf24);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+        }
+        .timeline-dot::after {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 20px);
+            background: linear-gradient(to bottom, #d4af37, #e2e8f0);
+        }
+        .timeline-dot:last-child::after {
+            display: none;
+        }
+        
+        /* Skill Tags */
+        .skill-tag {
+            background: #f1f5f9;
+            color: #1e293b;
+            transition: all 0.3s;
+        }
+        .skill-tag:hover {
+            background: linear-gradient(135deg, #d4af37, #fbbf24);
+            color: #0f172a;
+            transform: translateY(-2px);
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #d4af37, #fbbf24);
+            height: 8px;
+            border-radius: 10px;
+            width: 0;
+            transition: width 1s ease-out;
+        }
+        
+        /* Button */
+        .btn-download {
+            background: linear-gradient(135deg, #1e293b, #2d3a4a);
+            transition: all 0.3s;
+        }
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(30, 41, 59, 0.3);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #d4af37, #fbbf24); border-radius: 4px; }
+        
+        @media print {
+            body { background: white; }
+            .no-print { display: none; }
+            .card-white { box-shadow: none; border: 1px solid #e2e8f0; }
+            .progress-fill { background: #d4af37; }
+        }
+    </style>
+</head>
+<body>
+    <div class="max-w-6xl mx-auto py-8 px-4 md:px-6">
+        <!-- Download Button (No Print) -->
+        <div class="text-right mb-6 no-print">
+            <button onclick="window.print()" class="btn-download text-white px-6 py-3 rounded-xl font-semibold inline-flex items-center gap-2">
+                <i class="fas fa-download"></i> Download PDF
+            </button>
+        </div>
+        
+        <!-- Main Card -->
+        <div class="card-white overflow-hidden scale-in">
+            <!-- Header Section -->
+            <div class="gradient-primary text-white p-8 md:p-10">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div class="fade-left">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-2">Michael Zhang</h1>
+                        <p class="text-xl text-gray-300 mb-4">Senior Full-Stack Developer</p>
+                        <div class="flex flex-wrap gap-4 text-sm text-gray-300">
+                            <span><i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i>San Francisco, CA</span>
+                            <span><i class="fas fa-envelope mr-2 text-yellow-400"></i>michael.zhang@email.com</span>
+                            <span><i class="fas fa-phone mr-2 text-yellow-400"></i>+1 (555) 123-4567</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 fade-right">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition"><i class="fab fa-linkedin text-lg"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition"><i class="fab fa-github text-lg"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition"><i class="fab fa-twitter text-lg"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition"><i class="fab fa-stack-overflow text-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Section -->
+            <div class="p-8 md:p-10">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Left Column -->
+                    <div class="md:col-span-1 space-y-6">
+                        <!-- Profile Summary -->
+                        <div class="fade-up">
+                            <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fas fa-user text-yellow-600"></i> Profile</h2>
+                            <p class="text-gray-600 leading-relaxed text-sm">Results-driven Full-Stack Developer with 7+ years of experience building scalable web applications. Expert in React, Node.js, and cloud architecture. Passionate about creating elegant solutions to complex problems.</p>
+                        </div>
+                        
+                        <!-- Contact Info -->
+                        <div class="fade-up" style="animation-delay: 0.1s;">
+                            <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fas fa-address-card text-yellow-600"></i> Contact</h2>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex items-center gap-3"><i class="fas fa-map-marker-alt w-5 text-yellow-600"></i><span class="text-gray-600">San Francisco Bay Area, CA</span></div>
+                                <div class="flex items-center gap-3"><i class="fas fa-phone w-5 text-yellow-600"></i><span class="text-gray-600">+1 (555) 123-4567</span></div>
+                                <div class="flex items-center gap-3"><i class="fas fa-envelope w-5 text-yellow-600"></i><span class="text-gray-600">michael.zhang@email.com</span></div>
+                                <div class="flex items-center gap-3"><i class="fab fa-github w-5 text-yellow-600"></i><span class="text-gray-600">github.com/michaelzhang</span></div>
+                                <div class="flex items-center gap-3"><i class="fab fa-linkedin w-5 text-yellow-600"></i><span class="text-gray-600">linkedin.com/in/michaelzhang</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Skills -->
+                        <div class="fade-up" style="animation-delay: 0.2s;">
+                            <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fas fa-code text-yellow-600"></i> Technical Skills</h2>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">React</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">Next.js</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">TypeScript</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">Node.js</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">Python</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">Django</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">PostgreSQL</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">MongoDB</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">AWS</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">Docker</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">Kubernetes</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">GraphQL</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">Tailwind CSS</span>
+                                <span class="skill-tag px-3 py-1 rounded-full text-xs font-medium">Jest</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Languages -->
+                        <div class="fade-up" style="animation-delay: 0.3s;">
+                            <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fas fa-language text-yellow-600"></i> Languages</h2>
+                            <div class="space-y-2">
+                                <div><div class="flex justify-between text-sm"><span>English</span><span class="text-gray-500">Native</span></div><div class="progress-bar mt-1"><div class="progress-fill" style="width: 100%"></div></div></div>
+                                <div><div class="flex justify-between text-sm"><span>Mandarin</span><span class="text-gray-500">Fluent</span></div><div class="progress-bar mt-1"><div class="progress-fill" style="width: 90%"></div></div></div>
+                                <div><div class="flex justify-between text-sm"><span>Spanish</span><span class="text-gray-500">Intermediate</span></div><div class="progress-bar mt-1"><div class="progress-fill" style="width: 60%"></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="md:col-span-2 space-y-6">
+                        <!-- Work Experience -->
+                        <div class="fade-right">
+                            <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fas fa-briefcase text-yellow-600"></i> Work Experience</h2>
+                            <div class="space-y-6">
+                                <div class="timeline-dot pl-6 relative">
+                                    <div class="flex flex-wrap justify-between items-start mb-2">
+                                        <h3 class="font-bold text-lg">Senior Full-Stack Developer</h3>
+                                        <span class="text-sm text-gray-500">2022 - Present</span>
+                                    </div>
+                                    <p class="text-yellow-600 text-sm mb-2">TechCorp | San Francisco, CA</p>
+                                    <ul class="text-gray-600 text-sm space-y-1 list-disc list-inside">
+                                        <li>Led development of a microservices architecture serving 500K+ daily active users</li>
+                                        <li>Architected and implemented real-time notification system using WebSockets and Redis</li>
+                                        <li>Mentored 4 junior developers and conducted code reviews for 20+ team members</li>
+                                        <li>Improved application performance by 40% through optimization and caching strategies</li>
+                                        <li>Collaborated with product team to deliver 15+ major features on schedule</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="timeline-dot pl-6 relative">
+                                    <div class="flex flex-wrap justify-between items-start mb-2">
+                                        <h3 class="font-bold text-lg">Full-Stack Developer</h3>
+                                        <span class="text-sm text-gray-500">2019 - 2022</span>
+                                    </div>
+                                    <p class="text-yellow-600 text-sm mb-2">InnovateLabs | Austin, TX</p>
+                                    <ul class="text-gray-600 text-sm space-y-1 list-disc list-inside">
+                                        <li>Built and maintained 5+ client-facing applications using React and Node.js</li>
+                                        <li>Developed RESTful APIs with Express and PostgreSQL, serving 100K+ requests daily</li>
+                                        <li>Implemented CI/CD pipelines using GitHub Actions and Docker, reducing deployment time by 70%</li>
+                                        <li>Created comprehensive documentation and testing suite with 85% code coverage</li>
+                                        <li>Received "Developer of the Quarter" award for exceptional performance</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="timeline-dot pl-6 relative">
+                                    <div class="flex flex-wrap justify-between items-start mb-2">
+                                        <h3 class="font-bold text-lg">Junior Software Engineer</h3>
+                                        <span class="text-sm text-gray-500">2017 - 2019</span>
+                                    </div>
+                                    <p class="text-yellow-600 text-sm mb-2">StartupHub | Remote</p>
+                                    <ul class="text-gray-600 text-sm space-y-1 list-disc list-inside">
+                                        <li>Developed responsive web applications using HTML5, CSS3, and JavaScript</li>
+                                        <li>Collaborated with design team to implement pixel-perfect UI components</li>
+                                        <li>Fixed 100+ bugs and improved overall application stability by 30%</li>
+                                        <li>Participated in daily stand-ups and sprint planning meetings</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Education -->
+                        <div class="fade-right" style="animation-delay: 0.1s;">
+                            <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fas fa-graduation-cap text-yellow-600"></i> Education</h2>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex flex-wrap justify-between items-start mb-1">
+                                        <h3 class="font-bold">Master of Science in Computer Science</h3>
+                                        <span class="text-sm text-gray-500">2015 - 2017</span>
+                                    </div>
+                                    <p class="text-yellow-600 text-sm mb-2">Stanford University</p>
+                                    <p class="text-gray-600 text-sm">GPA: 3.9/4.0 | Thesis: "Optimizing Distributed Systems for Real-time Applications"</p>
+                                </div>
+                                <div>
+                                    <div class="flex flex-wrap justify-between items-start mb-1">
+                                        <h3 class="font-bold">Bachelor of Science in Software Engineering</h3>
+                                        <span class="text-sm text-gray-500">2011 - 2015</span>
+                                    </div>
+                                    <p class="text-yellow-600 text-sm mb-2">University of California, Berkeley</p>
+                                    <p class="text-gray-600 text-sm">Graduated Cum Laude | Dean's List (2013-2015)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Certifications -->
+                        <div class="fade-right" style="animation-delay: 0.2s;">
+                            <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fas fa-certificate text-yellow-600"></i> Certifications</h2>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 px-3 py-1 rounded-full text-xs">AWS Certified Solutions Architect</span>
+                                <span class="bg-gray-100 px-3 py-1 rounded-full text-xs">Google Professional Cloud Developer</span>
+                                <span class="bg-gray-100 px-3 py-1 rounded-full text-xs">Meta Backend Developer Certificate</span>
+                                <span class="bg-gray-100 px-3 py-1 rounded-full text-xs">Scrum Master Certified (SMC)</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Projects -->
+                        <div class="fade-right" style="animation-delay: 0.3s;">
+                            <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fas fa-folder-open text-yellow-600"></i> Featured Projects</h2>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl">
+                                    <h3 class="font-bold mb-1">TaskFlow Pro</h3>
+                                    <p class="text-xs text-gray-500 mb-2">React, Node.js, MongoDB, Socket.io</p>
+                                    <p class="text-xs text-gray-600">Real-time task management platform with 10K+ active users</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl">
+                                    <h3 class="font-bold mb-1">EcoTrack Dashboard</h3>
+                                    <p class="text-xs text-gray-500 mb-2">Next.js, TypeScript, D3.js, Prisma</p>
+                                    <p class="text-xs text-gray-600">Sustainability analytics dashboard for enterprises</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl">
+                                    <h3 class="font-bold mb-1">AI Image Generator</h3>
+                                    <p class="text-xs text-gray-500 mb-2">Python, FastAPI, React, TensorFlow</p>
+                                    <p class="text-xs text-gray-600">AI-powered image generation tool used by 5K+ creators</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl">
+                                    <h3 class="font-bold mb-1">CloudFlow</h3>
+                                    <p class="text-xs text-gray-500 mb-2">AWS, Terraform, Docker, Kubernetes</p>
+                                    <p class="text-xs text-gray-600">Serverless deployment platform with auto-scaling</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="border-t border-gray-100 p-6 text-center text-gray-400 text-xs">
+                <i class="fas fa-sync-alt mr-1"></i> Available for opportunities | Open to relocation
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Animate progress bars on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+            
+            // Add animation to timeline items
+            const timelineItems = document.querySelectorAll('.timeline-dot');
+            timelineItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-20px)';
+                setTimeout(() => {
+                    item.style.transition = 'all 0.5s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }, 100 + (index * 100));
+            });
+        });
+        
+        // Trigger progress bar animation when visible
+        const observerOptions = { threshold: 0.5 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.progress-fill');
+                    bars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.progress-bar').forEach(el => {
+            observer.observe(el.parentElement?.parentElement || el);
+        });
+    </script>
+</body>
+</html>

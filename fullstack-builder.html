@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeView - Full Stack Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/@codesandbox/sandpack-react@2.0.0/umd/sandpack-react.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; }
+        .sandpack-wrapper {
+            height: 100%;
+            width: 100%;
+        }
+        .sp-wrapper {
+            height: 100% !important;
+        }
+        .sp-preview-container {
+            height: 100% !important;
+        }
+    </style>
+</head>
+<body class="h-screen overflow-hidden">
+    <div class="flex h-full">
+        <!-- Sidebar -->
+        <div class="w-96 bg-[#0f0f0f] border-r border-gray-800 flex flex-col">
+            <div class="p-5 border-b border-gray-800">
+                <h1 class="text-xl font-bold text-white">TypeView <span class="text-blue-500">Full Stack</span></h1>
+                <p class="text-xs text-gray-500 mt-1">Generates React + Node.js apps</p>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-4">
+                <div id="chatMessages" class="space-y-3">
+                    <div class="bg-[#1a1a1a] rounded-lg p-3 text-gray-300 text-sm">
+                        <i class="fas fa-robot text-blue-500 mr-2"></i>
+                        Hi! I can build full-stack React + Node.js apps. Describe what you want to build.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-gray-800">
+                <textarea id="promptInput" rows="3" 
+                    placeholder="e.g., 'Build a task manager app with tasks, add/edit/delete, and save to MongoDB'"
+                    class="w-full bg-[#1a1a1a] border border-gray-700 rounded-lg p-3 text-white text-sm resize-none focus:outline-none focus:border-blue-500"></textarea>
+                <button onclick="generateApp()" 
+                    class="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition">
+                    <i class="fas fa-magic mr-2"></i>Generate Full Stack App
+                </button>
+                <button onclick="downloadProject()" id="downloadBtn" disabled
+                    class="mt-2 w-full bg-gray-700 text-gray-400 font-semibold py-2 rounded-lg transition cursor-not-allowed">
+                    <i class="fas fa-download mr-2"></i>Download Full Project (ZIP)
+                </button>
+            </div>
+        </div>
+        
+        <!-- Preview Area with Sandpack -->
+        <div class="flex-1 bg-white" id="previewContainer">
+            <div class="h-full flex items-center justify-center bg-gray-100">
+                <div class="text-center">
+                    <i class="fas fa-code text-5xl text-gray-400 mb-4"></i>
+                    <p class="text-gray-500">Your React app preview will appear here</p>
+                    <p class="text-gray-400 text-sm mt-2">Describe what you want to build above</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="loadingOverlay" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+        <div class="text-center">
+            <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-white">Generating your full-stack application...</p>
+            <p class="text-gray-400 text-sm mt-2">This may take 30-60 seconds</p>
+        </div>
+    </div>
+
+    <script>
+        let currentProject = null;
+        
+        function addMessage(role, content) {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = role === 'user' ? 'bg-blue-600/20 rounded-lg p-3 text-blue-300 text-sm' : 'bg-[#1a1a1a] rounded-lg p-3 text-gray-300 text-sm';
+            div.innerHTML = role === 'user' ? `<i class="fas fa-user mr-2"></i>${content}` : `<i class="fas fa-robot text-blue-500 mr-2"></i>${content}`;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        async function generateApp() {
+            const input = document.getElementById('promptInput');
+            const prompt = input.value.trim();
+            
+            if (!prompt) {
+                alert('Please describe what you want to build');
+                return;
+            }
+            
+            addMessage('user', prompt);
+            input.value = '';
+            
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            
+            try {
+                const response = await fetch('http://localhost:3001/api/generate-fullstack', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentProject = data;
+                    
+                    // Render preview using Sandpack
+                    renderPreview(data);
+                    
+                    addMessage('system', `✅ Generated ${Object.keys(data.files).length} files`);
+                    addMessage('system', `📁 Project: ${data.projectName || 'app'}`);
+                    
+                    // Enable download button
+                    const downloadBtn = document.getElementById('downloadBtn');
+                    downloadBtn.disabled = false;
+                    downloadBtn.classList.remove('bg-gray-700', 'text-gray-400', 'cursor-not-allowed');
+                    downloadBtn.classList.add('bg-green-600', 'text-white', 'cursor-pointer');
+                    downloadBtn.innerHTML = '<i class="fas fa-download mr-2"></i>Download Full Project (ZIP)';
+                    
+                } else {
+                    addMessage('system', '❌ Error: ' + (data.error || 'Failed to generate'));
+                }
+                
+            } catch (error) {
+                addMessage('system', '❌ Error: ' + error.message);
+            } finally {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }
+        }
+        
+        function renderPreview(project) {
+            const container = document.getElementById('previewContainer');
+            
+            // Find the main React component (App.js)
+            const appCode = project.files['frontend/src/App.js'] || 
+                           project.files['src/App.js'] || 
+                           Object.values(project.files).find(v => v.includes('React')) || 
+                           '<div>No React component found</div>';
+            
+            // Create Sandpack configuration
+            const sandpackConfig = {
+                files: {
+                    '/App.js': appCode,
+                    ...Object.entries(project.files).reduce((acc, [path, content]) => {
+                        if (path.includes('frontend/src/components/')) {
+                            const componentName = path.split('/').pop();
+                            acc[`/components/${componentName}`] = content;
+                        }
+                        return acc;
+                    }, {})
+                },
+                dependencies: {
+                    react: '^18.2.0',
+                    'react-dom': '^18.2.0',
+                    axios: '^1.4.0',
+                },
+                entry: '/App.js'
+            };
+            
+            // Inject Sandpack
+            container.innerHTML = `
+                <div id="sandpack-root" style="height: 100%; width: 100%;"></div>
+            `;
+            
+            // Initialize Sandpack
+            if (window.Sandpack) {
+                window.Sandpack.create({
+                    container: document.getElementById('sandpack-root'),
+                    files: sandpackConfig.files,
+                    dependencies: sandpackConfig.dependencies,
+                    entry: sandpackConfig.entry,
+                    options: {
+                        showLineNumbers: true,
+                        showInlineErrors: true,
+                        showNavigator: true,
+                    }
+                });
+            } else {
+                // Fallback: show code preview
+                container.innerHTML = `
+                    <div class="h-full overflow-auto p-6 bg-gray-900">
+                        <h2 class="text-white text-lg mb-4">App.js Preview</h2>
+                        <pre class="text-green-400 text-sm font-mono">${escapeHtml(appCode)}</pre>
+                        <p class="text-gray-400 mt-4">Sandpack failed to load. Click Download to get the full project.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        async function downloadProject() {
+            if (!currentProject) return;
+            
+            try {
+                const response = await fetch('http://localhost:3001/api/download-project', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ project: currentProject })
+                });
+                
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${currentProject.projectName || 'typeview-app'}.zip`;
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                addMessage('system', '📦 Download started!');
+            } catch (error) {
+                addMessage('system', '❌ Download failed: ' + error.message);
+            }
+        }
+        
+        // Enter key support
+        document.getElementById('promptInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                generateApp();
+            }
+        });
+    </script>
+</body>
+</html>

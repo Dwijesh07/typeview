@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuralMind | AI-Powered Content Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #ffffff; }
+        
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(139, 92, 246, 0.6); }
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-scale { animation: fadeInScale 0.6s ease-out forwards; opacity: 0; }
+        .float { animation: float 6s ease-in-out infinite; }
+        .glow-pulse { animation: glowPulse 3s ease-in-out infinite; }
+        
+        /* Gradient Styles */
+        .gradient-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-border {
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6, #06b6d4);
+            padding: 1px;
+            border-radius: 24px;
+        }
+        
+        /* Glass Card */
+        .glass-card {
+            background: rgba(15, 25, 35, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 28px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 25px 40px -12px rgba(139, 92, 246, 0.2);
+        }
+        
+        /* Button Styles */
+        .btn-primary-glow {
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            transition: all 0.3s;
+            color: white;
+        }
+        .btn-primary-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.5);
+        }
+        .btn-outline-glow {
+            border: 1px solid rgba(139, 92, 246, 0.5);
+            background: rgba(139, 92, 246, 0.05);
+            transition: all 0.3s;
+        }
+        .btn-outline-glow:hover {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        /* Feature Card */
+        .feature-card {
+            background: rgba(15, 25, 35, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-4px);
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #8b5cf6, #3b82f6); border-radius: 4px; }
+        
+        /* Particle Background */
+        .particle {
+            position: absolute;
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Particles -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="particle w-1 h-1 top-10 left-[10%]"></div>
+        <div class="particle w-2 h-2 top-20 left-[30%]"></div>
+        <div class="particle w-1 h-1 top-40 left-[70%]"></div>
+        <div class="particle w-3 h-3 top-60 left-[50%]"></div>
+        <div class="particle w-2 h-2 top-80 left-[80%]"></div>
+        <div class="particle w-1 h-1 top-[90%] left-[20%]"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-5 px-6 bg-black/40 backdrop-blur-xl border-b border-purple-500/20">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold"><span class="gradient-text">NeuralMind</span></div>
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link text-gray-300 hover:text-white transition">Home</a>
+                <a href="#features" class="nav-link text-gray-300 hover:text-white transition">Features</a>
+                <a href="#demo" class="nav-link text-gray-300 hover:text-white transition">Demo</a>
+                <a href="#pricing" class="nav-link text-gray-300 hover:text-white transition">Pricing</a>
+            </div>
+            <div class="flex gap-3">
+                <button class="px-5 py-2 text-gray-300 hover:text-white transition">Sign In</button>
+                <button class="px-6 py-2 btn-primary-glow rounded-full text-white font-semibold">Get Started →</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20"></div>
+        <div class="absolute top-20 left-10 w-96 h-96 bg-purple-600 rounded-full filter blur-[120px] opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-600 rounded-full filter blur-[120px] opacity-20 animate-pulse"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-8 fade-up">
+                <span class="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></span>
+                <span class="text-sm text-purple-300">Powered by Advanced AI</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[1.2] fade-up" style="animation-delay: 0.1s;">
+                Create smarter<br>
+                <span class="gradient-text">with AI</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed fade-up" style="animation-delay: 0.2s;">
+                NeuralMind uses cutting-edge AI to help you write, create, and innovate faster than ever. Generate high-quality content in seconds.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-up" style="animation-delay: 0.3s;">
+                <button class="px-8 py-4 btn-primary-glow rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2 group">
+                    Start Free Trial <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                </button>
+                <button class="px-8 py-4 btn-outline-glow rounded-full text-white font-semibold text-lg flex items-center justify-center gap-2">
+                    <i class="fas fa-play"></i> Watch Demo
+                </button>
+            </div>
+            <div class="mt-12 flex flex-wrap justify-center gap-8 fade-up" style="animation-delay: 0.4s;">
+                <div><div class="text-2xl font-bold gradient-text">50K+</div><div class="text-xs text-gray-400">Active Users</div></div>
+                <div><div class="text-2xl font-bold gradient-text">10M+</div><div class="text-xs text-gray-400">Words Generated</div></div>
+                <div><div class="text-2xl font-bold gradient-text">4.9</div><div class="text-xs text-gray-400">User Rating</div></div>
+                <div><div class="text-2xl font-bold gradient-text">24/7</div><div class="text-xs text-gray-400">AI Support</div></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section id="features" class="py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-purple-400 font-semibold mb-3 tracking-wider">POWERFUL FEATURES</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Everything you need to create</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Built for creators, writers, and innovators</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-500/20 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-brain text-2xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI Writing Assistant</h3>
+                    <p class="text-gray-400 leading-relaxed">Generate blog posts, articles, and social media content with human-like quality.</p>
+                </div>
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-500/20 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-code text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Code Generation</h3>
+                    <p class="text-gray-400 leading-relaxed">Write code in any language. Get explanations, documentation, and debugging help.</p>
+                </div>
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-chart-line text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Data Analysis</h3>
+                    <p class="text-gray-400 leading-relaxed">Extract insights from data, create visualizations, and make data-driven decisions.</p>
+                </div>
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-500/20 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-language text-2xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">50+ Languages</h3>
+                    <p class="text-gray-400 leading-relaxed">Translate and write content in over 50 languages with native-level fluency.</p>
+                </div>
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-500/20 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-image text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI Image Generation</h3>
+                    <p class="text-gray-400 leading-relaxed">Create stunning visuals from text descriptions. Perfect for any project.</p>
+                </div>
+                <div class="feature-card p-8 text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 flex items-center justify-center mx-auto mb-5">
+                        <i class="fas fa-shield-alt text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Enterprise Security</h3>
+                    <p class="text-gray-400 leading-relaxed">Bank-level encryption and data protection for your peace of mind.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Demo Section -->
+    <section id="demo" class="py-28 px-6 bg-black/30">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-purple-400 font-semibold mb-3 tracking-wider">TRY IT YOURSELF</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">See AI in action</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Experience the power of NeuralMind with this interactive demo</p>
+            </div>
+            
+            <div class="glass-card p-8">
+                <div class="mb-6">
+                    <label class="text-sm font-medium text-gray-300 mb-2 block">What would you like to create?</label>
+                    <textarea id="demoInput" rows="3" class="w-full bg-black/50 border border-purple-500/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition" placeholder="e.g., Write a product description for a new AI tool..."></textarea>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <button class="px-4 py-2 bg-purple-500/20 rounded-lg text-sm hover:bg-purple-500/30 transition">Blog Post</button>
+                        <button class="px-4 py-2 bg-blue-500/20 rounded-lg text-sm hover:bg-blue-500/30 transition">Social Media</button>
+                        <button class="px-4 py-2 bg-cyan-500/20 rounded-lg text-sm hover:bg-cyan-500/30 transition">Email</button>
+                    </div>
+                    <button onclick="generateDemo()" class="px-6 py-2 btn-primary-glow rounded-full text-white font-semibold">Generate →</button>
+                </div>
+                <div id="demoOutput" class="mt-6 p-4 bg-black/30 rounded-xl border border-purple-500/20 min-h-[100px] hidden">
+                    <div class="flex items-center gap-2 text-purple-400 mb-2">
+                        <i class="fas fa-robot"></i>
+                        <span class="text-sm font-medium">AI Response</span>
+                    </div>
+                    <p id="demoResult" class="text-gray-300 text-sm leading-relaxed"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-purple-400 font-semibold mb-3 tracking-wider">PRICING</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Simple, transparent pricing</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Start free, scale as you grow</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-2">Free</h3>
+                    <div class="text-4xl font-bold mb-4">$0<span class="text-lg text-gray-400">/month</span></div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center justify-center gap-2"><i class="fas fa-check text-purple-400"></i> 5,000 words/month</li>
+                        <li class="flex items-center justify-center gap-2"><i class="fas fa-check text-purple-400"></i> Basic AI models</li>
+                        <li class="flex items-center justify-center gap-2"><i class="fas fa-check text-purple-400"></i> Community support</li>
+                    </ul>
+                    <button class="w-full py-3 btn-outline-glow rounded-full font-semibold">Get Started</button>
+                </div>
+                <div class="glass-card p-8 text-center border border-purple-500/50 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-gradient-to-l from-purple-600 to-blue-600 px-4 py-1 rounded-bl-2xl text-sm font-bold">POPULAR</div>
+                    <h3 class="text-2xl font-bold mb-2">Pro</h3>
+                    <div class="text-4xl font-bold mb-4">$29<span class="text-lg text-gray-400">/month</span></div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center justify-center gap-2"><i class="fas fa-check text-purple-400"></i> Unlimited words</li>
+                        <li class="flex items-center justify-center gap-2"><i class="fas fa-check text-purple-400"></i> Advanced AI models</li>
+                        <li class="flex items-center justify-center gap-2"><i class="fas fa-check text-purple-400"></i> Priority support</li>
+                        <li class="flex items-center justify-center gap-2"><i class="fas fa-check text-purple-400"></i> API access</li>
+                    </ul>
+                    <button class="w-full py-3 btn-primary-glow rounded-full font-semibold">Start Free Trial</button>
+                </div>
+                <div class="glass-card p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+                    <div class="text-4xl font-bold mb-4">Custom</div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center justify-center gap-2"><i class="fas fa-check text-purple-400"></i> Everything in Pro</li>
+                        <li class="flex items-center justify-center gap-2"><i class="fas fa-check text-purple-400"></i> Custom models</li>
+                        <li class="flex items-center justify-center gap-2"><i class="fas fa-check text-purple-400"></i> Dedicated support</li>
+                        <li class="flex items-center justify-center gap-2"><i class="fas fa-check text-purple-400"></i> SLA guarantee</li>
+                    </ul>
+                    <button class="w-full py-3 btn-outline-glow rounded-full font-semibold">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="py-28 px-6 bg-black/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-purple-400 font-semibold mb-3 tracking-wider">TESTIMONIALS</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-5">Trusted by creators worldwide</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Join thousands of satisfied users</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-6">
+                    <i class="fas fa-quote-left text-2xl text-purple-400 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 leading-relaxed mb-6">"NeuralMind has transformed my content creation workflow. I can now produce high-quality articles in minutes instead of hours."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center"><i class="fas fa-user text-purple-400"></i></div>
+                        <div><div class="font-semibold">Sarah Johnson</div><div class="text-xs text-gray-500">Content Creator</div></div>
+                    </div>
+                </div>
+                <div class="glass-card p-6">
+                    <i class="fas fa-quote-left text-2xl text-purple-400 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 leading-relaxed mb-6">"The code generation feature is incredible. It helps me debug and write cleaner code faster than ever before."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center"><i class="fas fa-user text-blue-400"></i></div>
+                        <div><div class="font-semibold">Michael Chen</div><div class="text-xs text-gray-500">Software Engineer</div></div>
+                    </div>
+                </div>
+                <div class="glass-card p-6">
+                    <i class="fas fa-quote-left text-2xl text-purple-400 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 leading-relaxed mb-6">"The best AI tool I've used. The image generation is stunning and the writing assistant saves me hours every day."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center"><i class="fas fa-user text-cyan-400"></i></div>
+                        <div><div class="font-semibold">Emma Rodriguez</div><div class="text-xs text-gray-500">Marketing Director</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="gradient-border rounded-3xl">
+                <div class="glass-card p-12 bg-black/30">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to transform your workflow?</h2>
+                    <p class="text-gray-400 text-lg mb-8">Join 50,000+ creators already using NeuralMind to work smarter.</p>
+                    <button class="px-8 py-4 btn-primary-glow rounded-full text-white font-semibold text-lg inline-flex items-center gap-2 group">
+                        Start Your Free Trial <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-purple-500/20">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-2xl font-bold gradient-text">NeuralMind</div>
+            <div class="flex gap-8">
+                <i class="fab fa-twitter text-gray-500 hover:text-purple-400 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-github text-gray-500 hover:text-purple-400 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-discord text-gray-500 hover:text-purple-400 cursor-pointer transition text-xl"></i>
+                <i class="fab fa-linkedin text-gray-500 hover:text-purple-400 cursor-pointer transition text-xl"></i>
+            </div>
+            <div class="text-gray-500 text-sm">© 2024 NeuralMind. All rights reserved.</div>
+        </div>
+    </footer>
+    
+    <script>
+        function generateDemo() {
+            const input = document.getElementById('demoInput').value;
+            const outputDiv = document.getElementById('demoOutput');
+            const resultEl = document.getElementById('demoResult');
+            
+            if (!input.trim()) {
+                alert('Please enter something to generate');
+                return;
+            }
+            
+            outputDiv.classList.remove('hidden');
+            resultEl.innerHTML = '<span class="inline-block w-4 h-4 border-2 border-purple-400 border-t-transparent rounded-full animate-spin mr-2"></span> Generating...';
+            
+            setTimeout(() => {
+                const responses = [
+                    "Introducing NeuralMind: the AI-powered platform that revolutionizes how you create. Whether you're writing blog posts, crafting social media content, or generating code, NeuralMind helps you work smarter, not harder. Try it free today!",
+                    "Unlock your creative potential with NeuralMind. Our advanced AI understands context, tone, and style to produce content that sounds like you. Join thousands of creators who've already transformed their workflow.",
+                    "Stop struggling with writer's block. NeuralMind's AI assistant generates high-quality content in seconds. From blog posts to marketing copy, we've got you covered. Start your free trial now!"
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                resultEl.innerHTML = randomResponse;
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
