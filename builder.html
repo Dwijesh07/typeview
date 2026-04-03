@@ -733,7 +733,7 @@
     btn.innerHTML = '<span class="spinner"></span> Joining...';
     
     try {
-      const response = await fetch('/api/waitlist/join', {
+      const response = await fetch('/.netlify/functions/api/waitlist/join', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email })
@@ -896,7 +896,7 @@
     document.getElementById('loadingOverlay').style.display = 'flex';
 
     try {
-      const res = await fetch('/api/generate', {
+      const res = await fetch('/.netlify/functions/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
