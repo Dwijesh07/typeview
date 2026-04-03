@@ -733,7 +733,7 @@
     btn.innerHTML = '<span class="spinner"></span> Joining...';
     
     try {
-      const response = await fetch('http://localhost:3001/api/waitlist/join', {
+      const response = await fetch('/api/waitlist/join', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email })
@@ -896,7 +896,7 @@
     document.getElementById('loadingOverlay').style.display = 'flex';
 
     try {
-      const res = await fetch('http://localhost:3001/api/generate', {
+      const res = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -917,14 +917,13 @@
         document.getElementById('openBtn').disabled     = false;
         document.getElementById('newBtn').style.display = 'flex';
       } else if (data.needsClarification) {
-        // Handle clarification request
         addMsg('ai', `${data.message}<br><br>${data.questions.map(q => `• ${q}`).join('<br>')}`);
         document.getElementById('promptInput').placeholder = "Answer the questions above...";
       } else {
         addMsg('ai', `❌ Error: ${data.error || 'Something went wrong. Try again.'}`);
       }
     } catch (err) {
-      addMsg('ai', `❌ Can't reach the server. Make sure it's running on port 3001.<br><small>${err.message}</small>`);
+      addMsg('ai', `❌ Can't reach the server. Make sure your backend is deployed.<br><small>${err.message}</small>`);
     } finally {
       document.getElementById('loadingOverlay').style.display = 'none';
       sendBtn.disabled = false;
