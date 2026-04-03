@@ -2,7 +2,7 @@ const { createClient } = require('@supabase/supabase-js');
 const nodemailer = require('nodemailer');
 
 // Import CSS Library
-const { CSS_LIBRARY } = require('../../css-library.js');
+const { CSS_LIBRARY } = require('../../backend/css-library.js');
 
 // Environment variables (set in Netlify dashboard)
 const NVIDIA_API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
