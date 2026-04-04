@@ -499,11 +499,11 @@ app.post('/api/generate', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`
 ╔══════════════════════════════════════════════════════════════╗
 ║  🚀 TypeView Server Running (NVIDIA NIM + CSS Library)       ║
-║  📡 http://localhost:${PORT}                                   ║
+║  📡 Server running on port ${PORT}                                   ║
 ║  🤖 Model: ${NVIDIA_MODEL}                                     ║
 ║  🖼️  Unsplash: ${UNSPLASH_ACCESS_KEY ? '✅ Enabled' : '❌ Disabled (add key to .env)'} ║
 ║  📚 CSS Library: Loaded!                                     ║
